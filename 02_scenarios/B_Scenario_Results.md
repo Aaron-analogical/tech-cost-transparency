@@ -9,7 +9,7 @@ Both scenarios are driven off a single parameter table (`SCENARIO_PARAM`), so an
 | S1 Cloud migration | Share of Data Centre (CP04) moved to cloud | 15% | Migrated workload keeps serving the same products/apps; only unit cost and pool change | Consumers do not change, only where the workload runs |
 | S1 Cloud migration | Pool re-tag | modelled | The migrated 15% is emitted as CP05 (Public Cloud) rows, not left blended inside CP04 | `VW_SCENARIO_S1_BY_POOL` shows CP04 shrinking and CP05 growing by the same $, so the move is auditable at the pool level, not just netted into a product/application total |
 | S1 Cloud migration | Cloud cost factor | 1.10 | Cloud costs 10% more than owned DC for the migrated steady-state workload | Always-on workloads typically price above fully-owned DC unit cost at list rates |
-| S1 Cloud migration | DC cost avoidable | yes | No stranded facilities cost when 15% leaves | Simplifying assumption, flagged as a sensitivity |
+| S1 Cloud migration | Share of migrated DC cost actually shed (`dc_avoidable_pct`) | 100% in the base case | No stranded facilities cost when 15% leaves | Optimistic: CP04 is a fixed cost pool. Stress-tested from 100% down to 0% in the sensitivity grid below |
 | S2 Vendor increase | Rate rise on Vendor / Managed Service (CP06) | +8% | Full pass-through, no volume or scope change | Contractual rate rise with no renegotiation offset |
 
 ## Results by product (fully-loaded)
@@ -52,7 +52,16 @@ Ordered by size of the vendor-scenario impact. Application deltas reconcile to t
 
 ## Sensitivity
 
-**Scenario 1 is dominated by the cloud cost factor, and its sign flips.** At a 10% premium (1.10) the migration costs +$50,474. At a 10% discount (0.90) the identical migration saves -$50,475. Because the workload and its consumers are unchanged, the entire result is the premium or discount on the migrated slice. A secondary risk points the same way: if Data Centre facilities cost is fixed in the short run (stranded cost), any saving is eroded because the DC cost does not actually leave. This is the assumption to stress live.
+**Scenario 1 depends on two levers, and the second one matters more.** The impact reduces to a closed form:
+
+`S1 delta = Data Centre cost ($3.36M) x 15% x (cloud cost factor - share of DC cost shed)`
+
+- **Cloud cost factor.** With all the migrated DC cost shed, the sign flips with the cloud price: +$50,474 at a 10% premium, -$50,475 at a 10% discount.
+- **Stranded cost.** CP04 is a fixed cost pool (facilities, power, leases), so in the short run little of it leaves with the workload. If none of it is shed, the DC bill stays and cloud is paid on top: +$555k at a 10% premium.
+
+![S1 sensitivity heatmap](S1_sensitivity_heatmap.png)
+
+Only the top-left corner saves money: cloud has to be cheaper *and* nearly all the data-centre cost has to go away. Breakeven is where the share of DC cost shed equals the cloud cost factor, so even with a 20% cloud discount the move adds cost unless more than 80% of the data-centre cost really goes away. The full grid is in [`S1_sensitivity_grid.csv`](S1_sensitivity_grid.csv), produced by `run_local.py`. This is the assumption to stress before committing.
 
 **Scenario 2 is linear and has no sign risk.** The result is simply +8% times the $2.55M vendor pool. The only offsets are commercial: renegotiating the rate or reducing managed-service scope. There is no modelling ambiguity.
 

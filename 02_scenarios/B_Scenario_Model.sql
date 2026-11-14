@@ -6,6 +6,9 @@
        justified cloud unit-cost factor (default 1.10 = 10% premium).
        Modelled as an actual pool re-tag: retained rows stay CP04 at 85%
        of cost, migrated rows are re-tagged CP05 at 15% * cloud_factor.
+       dc_avoidable_pct is the share of the migrated slice's Data Centre
+       cost that actually goes away (1.0 = fully avoidable; 0.0 = fully
+       stranded, so the DC bill stays and cloud is paid on top).
    S2: +8% rate increase on Vendor / Managed Service (CP06). No pool
        change - it is a rate rise on the same vendor relationship.
    Overhead is re-spread onto each scenario's new base (total unchanged).
@@ -18,11 +21,12 @@ USE SCHEMA CASE_STUDY.MERIDIAN;
 CREATE OR REPLACE TABLE SCENARIO_PARAM (
     scenario_id  VARCHAR,
     param_name   VARCHAR,
-    param_value  NUMBER(10,4)
+    param_value  DECIMAL(10,4)
 );
 INSERT INTO SCENARIO_PARAM VALUES
     ('S1','dc_migration_pct',     0.15),   -- share of Data Centre (CP04) workload moved to cloud
     ('S1','cloud_cost_factor',    1.10),   -- cloud unit cost vs on-prem: 1.10 = 10% premium
+    ('S1','dc_avoidable_pct',     1.00),   -- share of the migrated DC cost actually shed (1 = no stranded cost)
     ('S2','vendor_rate_increase', 0.08);   -- +8% on Vendor / Managed Service (CP06)
 
 /* 2a) S1 rows - CP04 split into a retained CP04 row and a migrated CP05 row
@@ -31,7 +35,8 @@ CREATE OR REPLACE VIEW VW_S1_ROWS AS
 WITH p AS (
     SELECT
         MAX(CASE WHEN param_name='dc_migration_pct'  THEN param_value END) AS mig_pct,
-        MAX(CASE WHEN param_name='cloud_cost_factor' THEN param_value END) AS cloud_factor
+        MAX(CASE WHEN param_name='cloud_cost_factor' THEN param_value END) AS cloud_factor,
+        MAX(CASE WHEN param_name='dc_avoidable_pct'  THEN param_value END) AS avoidable
     FROM SCENARIO_PARAM WHERE scenario_id='S1'
 ),
 base AS (
@@ -43,8 +48,8 @@ split AS (
     SELECT b.DATE_KEY, b.COST_POOL_ID, b.PRODUCT_ID, b.APPLICATION_ID, b.da
     FROM base b WHERE b.COST_POOL_ID <> 'CP04'
     UNION ALL
-    -- CP04 retained portion (85%), stays CP04
-    SELECT b.DATE_KEY, 'CP04', b.PRODUCT_ID, b.APPLICATION_ID, b.da * (1 - p.mig_pct)
+    -- CP04 retained portion: the 85% that stays, plus any stranded share of the migrated 15%
+    SELECT b.DATE_KEY, 'CP04', b.PRODUCT_ID, b.APPLICATION_ID, b.da * (1 - p.mig_pct * p.avoidable)
     FROM base b CROSS JOIN p WHERE b.COST_POOL_ID = 'CP04'
     UNION ALL
     -- CP04 migrated portion (15%), re-tagged CP05 at the cloud cost factor
@@ -131,8 +136,14 @@ FROM base_agg b
 FULL OUTER JOIN s1_agg s1 ON s1.COST_POOL_ID = b.COST_POOL_ID
 ORDER BY baseline_da DESC;
 
-/* 4) Sensitivity: flip the cloud factor to a discount, then restore
+/* 4) Sensitivity: S1 delta = CP04 cost x mig_pct x (cloud_factor - dc_avoidable_pct)
+   Flip the cloud factor to a discount, then restore:
 UPDATE SCENARIO_PARAM SET param_value = 0.90 WHERE scenario_id='S1' AND param_name='cloud_cost_factor';
 SELECT ROUND(SUM(s1_delta)) AS s1_total_at_0_90 FROM VW_SCENARIO_BY_PRODUCT;   -- expect approx -50,475
 UPDATE SCENARIO_PARAM SET param_value = 1.10 WHERE scenario_id='S1' AND param_name='cloud_cost_factor';
+   Fully stranded Data Centre cost (nothing shed), then restore:
+UPDATE SCENARIO_PARAM SET param_value = 0.00 WHERE scenario_id='S1' AND param_name='dc_avoidable_pct';
+SELECT ROUND(SUM(s1_delta)) AS s1_total_stranded FROM VW_SCENARIO_BY_PRODUCT;  -- expect approx +555,227
+UPDATE SCENARIO_PARAM SET param_value = 1.00 WHERE scenario_id='S1' AND param_name='dc_avoidable_pct';
+   The full grid is produced by run_local.py -> 02_scenarios/S1_sensitivity_grid.csv
 */
