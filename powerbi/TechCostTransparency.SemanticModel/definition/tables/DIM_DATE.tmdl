@@ -13,7 +13,7 @@ table DIM_DATE
 
 	column MONTH_START
 		dataType: dateTime
-		formatString: Long Date
+		formatString: mmm yyyy
 		lineageTag: 0c1ac782-447e-4bc1-8846-9fd7f20c16b2
 		summarizeBy: none
 		sourceColumn: MONTH_START

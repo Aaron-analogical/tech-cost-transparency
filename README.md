@@ -20,6 +20,25 @@ Meridian's infrastructure costs sit in the General Ledger by cost pool (labour, 
 
 ![Cloud migration sensitivity](02_scenarios/S1_sensitivity_heatmap.png)
 
+## Power BI report
+
+![Power BI report: filtering by product, drilling from product to application, and moving the what-if sliders](03_powerbi/dashboard-demo.gif)
+
+<!-- Uncomment once the .pbix is attached to a GitHub release:
+**Explore it yourself:** [download TechCostTransparency.pbix](https://github.com/Aaron-analogical/tech-cost-transparency/releases/latest/download/TechCostTransparency.pbix) (opens in the free [Power BI Desktop](https://www.microsoft.com/power-platform/products/power-bi/desktop), Windows).
+
+> **View only.** The file holds a snapshot of the data, so every page, filter and what-if slider works as soon as you open it. Do not click *Refresh*: it will fail, because the Snowflake account is private.
+-->
+
+| Page | What it shows |
+|---|---|
+| **Executive Overview** | Fully-loaded cost, overhead loading and variance vs budget, with cost split by product and by cost pool |
+| **Variance & Drivers** | Actual vs budget vs forecast by month (pre-overhead), the cost pools driving spend, and commentary on the notable variances and data gaps |
+| **Cost Transparency Drill** | Matrix from product down to application: direct and allocated cost, overhead loading, fully-loaded cost and allocation %, plus cost per vCPU-hour |
+| **Scenario What-If** | Two sliders, cloud migration % and vendor rate increase %, recalculate the cost deltas and the combined fully-loaded cost by product and application |
+
+The project is stored as PBIP, so the model and report are plain text: measures are in [`_Measure.tmdl`](powerbi/TechCostTransparency.SemanticModel/definition/tables/_Measure.tmdl), and the design notes are in [`C_PowerBI_Design.md`](03_powerbi/C_PowerBI_Design.md). The repo copy contains no data, so it opens with empty visuals until it is refreshed against a Snowflake account (see [below](#running-on-snowflake-and-power-bi)).
+
 ## Run it locally (no Snowflake needed)
 
 ```bash
@@ -64,4 +83,4 @@ The full reasoning is in [`A_Methodology_Note.md`](01_attribution/A_Methodology_
 
 **Snowflake.** Load the CSVs in `data/` into a schema (the scripts use `CASE_STUDY.MERIDIAN`), then run `01_attribution/A_Attribution_Variance.sql` followed by `02_scenarios/B_Scenario_Model.sql`.
 
-**Power BI.** Open `powerbi/TechCostTransparency.pbip` in Power BI Desktop. In each table's source, replace `<your-account>` with your Snowflake account identifier, then refresh.
+**Power BI.** Open `powerbi/TechCostTransparency.pbip` in Power BI Desktop. Go to *Transform data → Edit parameters*, set `SnowflakeAccount` to your own account host (replacing `<your-account>.snowflakecomputing.com`), then refresh.
