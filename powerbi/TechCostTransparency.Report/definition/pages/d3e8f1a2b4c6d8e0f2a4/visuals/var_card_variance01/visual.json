@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "var_card_variance01",
+  "position": {
+    "x": 950,
+    "y": 100,
+    "z": 0,
+    "height": 100,
+    "width": 290,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Variance % vs Budget (Period)"
+                }
+              },
+              "queryRef": "_Measure.Variance % vs Budget (Period)",
+              "nativeQueryRef": "Variance % vs Budget",
+              "displayName": "Variance % vs Budget"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

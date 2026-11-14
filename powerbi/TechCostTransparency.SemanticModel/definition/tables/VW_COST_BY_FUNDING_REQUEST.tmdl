@@ -1,0 +1,52 @@
+table VW_COST_BY_FUNDING_REQUEST
+	lineageTag: 2231eac1-7b74-4334-bd2d-d417b1aed605
+
+	column DATE_KEY
+		dataType: double
+		lineageTag: f8a5e682-55a8-4366-840c-5a57f9c8ed8b
+		summarizeBy: sum
+		sourceColumn: DATE_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FUNDING_REQUEST_ID
+		dataType: string
+		lineageTag: 033c0993-89bb-4732-a446-893483ea7cce
+		summarizeBy: none
+		sourceColumn: FUNDING_REQUEST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROGRAM_ID
+		dataType: string
+		lineageTag: c1da6b41-b870-491f-9b0e-f79777fb7dba
+		summarizeBy: none
+		sourceColumn: PROGRAM_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FULLY_LOADED_USD
+		dataType: double
+		lineageTag: afdb22cc-cb24-43d2-8b71-c3234fccaa47
+		summarizeBy: sum
+		sourceColumn: FULLY_LOADED_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition VW_COST_BY_FUNDING_REQUEST = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    VW_COST_BY_FUNDING_REQUEST_View = MERIDIAN_Schema{[Name="VW_COST_BY_FUNDING_REQUEST",Kind="View"]}[Data]
+				in
+				    VW_COST_BY_FUNDING_REQUEST_View
+
+	annotation PBI_ResultType = Table
+

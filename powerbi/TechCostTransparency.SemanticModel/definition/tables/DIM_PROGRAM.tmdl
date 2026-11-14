@@ -1,0 +1,40 @@
+table DIM_PROGRAM
+	lineageTag: 68965f6b-8bd8-403e-98bb-32209ead6bb1
+
+	column PROGRAM_ID
+		dataType: string
+		lineageTag: 99ca3dca-35d1-4447-bdda-f6f00c1bebec
+		summarizeBy: none
+		sourceColumn: PROGRAM_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROGRAM_NAME
+		dataType: string
+		lineageTag: 4212cde4-b391-4c40-9a14-5e7151795fa2
+		summarizeBy: none
+		sourceColumn: PROGRAM_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROGRAM_OWNER
+		dataType: string
+		lineageTag: 08770fd0-98d5-40d1-bfa3-6b87966d2f73
+		summarizeBy: none
+		sourceColumn: PROGRAM_OWNER
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PROGRAM = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    DIM_PROGRAM_Table = MERIDIAN_Schema{[Name="DIM_PROGRAM",Kind="Table"]}[Data]
+				in
+				    DIM_PROGRAM_Table
+
+	annotation PBI_ResultType = Table
+

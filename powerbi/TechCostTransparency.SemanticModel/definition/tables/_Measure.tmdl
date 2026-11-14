@@ -1,0 +1,151 @@
+table _Measure
+	lineageTag: 8b8d14e5-086d-42c7-be0c-61cfb98f067d
+
+	measure 'Allocation %' =
+			
+			DIVIDE (
+			    SUM ( FCT_FULLY_LOADED_COST[FULLY_LOADED_USD] ),
+			    CALCULATE (
+			        SUM ( FCT_FULLY_LOADED_COST[FULLY_LOADED_USD] ),
+			        ALLSELECTED ( DIM_PRODUCT ),
+			        ALLSELECTED ( DIM_APPLICATION ),
+			        ALLSELECTED ( DIM_COST_POOL ),
+			        ALLSELECTED ( BRIDGE_PRODUCT_FUNDING_PROGRAM )
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 7a927e2d-a84b-46c1-a152-8886382e4858
+
+	measure 'Variance % vs Budget' =
+			
+			VAR ActualPreOverhead = SUM ( FCT_FULLY_LOADED_COST[DIRECT_AND_ALLOC_USD] )
+			VAR Budget = SUM ( FACT_BUDGET_FORECAST[BUDGET_USD] )
+			RETURN DIVIDE ( ActualPreOverhead - Budget, Budget )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c9f199a9-1f65-4044-a1f4-588ccd3e408c
+
+	measure 'Scenario Cloud Delta' =
+			
+			VAR MigPct = SELECTEDVALUE ( 'What-if'[Parameter], 0.15 )
+			VAR CloudFactor = 1.10
+			VAR DCCost =
+			    CALCULATE (
+			        SUM ( FCT_FULLY_LOADED_COST[DIRECT_AND_ALLOC_USD] ),
+			        DIM_COST_POOL[COST_POOL_ID] = "CP04"
+			    )
+			RETURN DCCost * MigPct * ( CloudFactor - 1 )
+		lineageTag: dbc8e86c-e451-4e7c-a637-62d296b8af4b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Fully-Loaded Cost' =
+			
+			SUM ( FCT_FULLY_LOADED_COST[FULLY_LOADED_USD] )
+		lineageTag: b90e6a7d-e342-447b-8cdc-f8883d820572
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Fully-Loaded Cost (Scenario)' =
+			
+			[Fully-Loaded Cost] + [Scenario Cloud Delta]
+		lineageTag: a2d2a1a6-0c39-49a1-81ee-c8bc305ad840
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cost per vCPU-hour' =
+			
+			DIVIDE (
+			    [Fully-Loaded Cost],
+			    CALCULATE (
+			        SUM ( FACT_CONSUMPTION[DRIVER_QTY] ),
+			        FACT_CONSUMPTION[DRIVER_TYPE] = "vCPU_HOURS"
+			    )
+			)
+		formatString: $#,##0.00
+		lineageTag: 1f6a3b2c-4d5e-4a1b-9c3d-7e8f9a0b1c2d
+
+	measure 'Scenario Vendor Delta' =
+			
+			VAR VendorInc = SELECTEDVALUE ( 'Vendor Increase %'[Parameter], 0.08 )
+			VAR VendorCost =
+			    CALCULATE (
+			        SUM ( FCT_FULLY_LOADED_COST[DIRECT_AND_ALLOC_USD] ),
+			        DIM_COST_POOL[COST_POOL_ID] = "CP06"
+			    )
+			RETURN VendorCost * VendorInc
+		formatString: $#,##0
+		lineageTag: 2a7b4c3d-5e6f-4b2c-8d4e-9f0a1b2c3d4e
+
+	measure 'Fully-Loaded Cost (Vendor Scenario)' =
+			
+			[Fully-Loaded Cost] + [Scenario Vendor Delta]
+		formatString: $#,##0
+		lineageTag: 3b8c5d4e-6f7a-4c3d-9e5f-0a1b2c3d4e5f
+
+	measure 'Fully-Loaded Cost (Both Scenarios)' =
+			
+			[Fully-Loaded Cost] + [Scenario Cloud Delta] + [Scenario Vendor Delta]
+		formatString: $#,##0.00
+		lineageTag: 4c9d6e5f-7a8b-4d4e-af6a-1b2c3d4e5f6a
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Actual Cost (Pre-Overhead)' =
+			
+			SUM ( VW_VARIANCE[ACTUAL_USD] )
+		formatString: $#,##0
+		lineageTag: 5d0e7f6a-8b1c-4d2e-af7b-2c3d4e5f6a7c
+
+	measure Budget =
+			
+			SUM ( VW_VARIANCE[BUDGET_USD] )
+		formatString: $#,##0
+		lineageTag: 6e1f8a7b-9c2d-4e3f-b08c-3d4e5f6a7b8d
+
+	measure Forecast =
+			
+			SUM ( VW_VARIANCE[FORECAST_USD] )
+		formatString: $#,##0
+		lineageTag: 7f2a9b8c-0d3e-4f4a-c19d-4e5f6a7b8c9e
+
+	measure 'Variance % vs Budget (Period)' =
+			
+			DIVIDE ( [Actual Cost (Pre-Overhead)] - [Budget], [Budget] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 8a3b0c9d-1e4f-4a5b-d20e-5f6a7b8c9d0f
+
+	measure 'Variance % vs Forecast (Period)' =
+			
+			DIVIDE ( [Actual Cost (Pre-Overhead)] - [Forecast], [Forecast] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 9b4c1d0e-2f5a-4b6c-e31f-6a7b8c9d0e1a
+
+	measure 'Overhead % of Fully-Loaded' =
+			
+			DIVIDE ( SUM ( FCT_FULLY_LOADED_COST[OVERHEAD_LOADING_USD] ), SUM ( FCT_FULLY_LOADED_COST[FULLY_LOADED_USD] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: ac5d2e1f-3a6b-4c7d-8e9f-0a1b2c3d4e5f
+
+	measure 'Application Count' =
+			
+			DISTINCTCOUNT ( DIM_APPLICATION[APPLICATION_ID] )
+		formatString: 0
+		lineageTag: bd6e3f20-4b7c-4d8e-9f0a-1b2c3d4e5f60
+
+	column Column
+		formatString: 0
+		lineageTag: 4a877c0d-1778-4d75-9fc6-6b4b4a49cc73
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measure = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = c72915845e024d11990191ceb0edf191
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

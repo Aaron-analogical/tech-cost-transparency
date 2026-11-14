@@ -1,0 +1,80 @@
+table FCT_FULLY_LOADED_COST
+	lineageTag: 69c888a1-46be-42ec-a51b-b451f9de17b9
+
+	column DATE_KEY
+		dataType: string
+		lineageTag: e5041a82-8209-4d5e-9ac3-29d916de0d40
+		summarizeBy: none
+		sourceColumn: DATE_KEY
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_POOL_ID
+		dataType: string
+		lineageTag: c9be5f5c-01b0-4ec0-be52-9a20b43e322e
+		summarizeBy: none
+		sourceColumn: COST_POOL_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: 36503d10-e912-4741-a1a7-ea9e2dcd29e0
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column APPLICATION_ID
+		dataType: string
+		lineageTag: 5968f5dc-c178-4db4-adcf-583ff9c8b2d7
+		summarizeBy: none
+		sourceColumn: APPLICATION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIRECT_AND_ALLOC_USD
+		dataType: double
+		lineageTag: 19530186-1f5d-4228-85bf-1e24441bf571
+		summarizeBy: sum
+		sourceColumn: DIRECT_AND_ALLOC_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OVERHEAD_LOADING_USD
+		dataType: double
+		lineageTag: 090060a2-5702-4fe9-bea9-c0ffff2e80a0
+		summarizeBy: sum
+		sourceColumn: OVERHEAD_LOADING_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FULLY_LOADED_USD
+		dataType: double
+		lineageTag: abafa3b8-fd5b-4017-8825-47babb0cc055
+		summarizeBy: sum
+		sourceColumn: FULLY_LOADED_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FCT_FULLY_LOADED_COST = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    FCT_FULLY_LOADED_COST_Table = MERIDIAN_Schema{[Name="FCT_FULLY_LOADED_COST",Kind="Table"]}[Data]
+				in
+				    FCT_FULLY_LOADED_COST_Table
+
+	annotation PBI_ResultType = Table
+

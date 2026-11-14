@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="830" height="620" viewBox="0 0 830 620" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#b7791f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#2b6cb0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="830" height="620" fill="#ffffff"/>
+
+  <!-- relationships: dims <-> core fact -->
+  <g fill="none">
+    <line x1="135" y1="90" x2="300" y2="152" stroke="#718096" stroke-width="1" marker-end="url(#arrow)"/>
+    <line x1="545" y1="90" x2="400" y2="152" stroke="#718096" stroke-width="1" marker-end="url(#arrow)"/>
+    <line x1="135" y1="300" x2="300" y2="248" stroke="#718096" stroke-width="1" marker-end="url(#arrow)"/>
+    <line x1="545" y1="300" x2="400" y2="248" stroke="#718096" stroke-width="1" marker-end="url(#arrow)"/>
+    <!-- bridge -> fact (product_id, carries the funding-request/program rollup + its assumption) -->
+    <line x1="700" y1="90" x2="460" y2="190" stroke="#b7791f" stroke-width="1.2" marker-end="url(#arrowAmber)"/>
+
+    <!-- satellite facts: routed in dedicated lanes around the core fact / what-if box -->
+    <!-- dim_date -> fact_consumption -->
+    <path d="M135,90 L135,98 L15,98 L15,470 L100,470 L100,490" stroke="#2b6cb0" stroke-width="1.1" marker-end="url(#arrowBlue)"/>
+    <!-- dim_date -> fact_budget_forecast -->
+    <path d="M135,90 L135,94 L8,94 L8,478 L460,478 L460,490" stroke="#2b6cb0" stroke-width="1.1" marker-end="url(#arrowBlue)"/>
+    <!-- dim_product -> fact_consumption -->
+    <path d="M545,90 L545,96 L810,96 L810,486 L350,486 L350,490" stroke="#2b6cb0" stroke-width="1.1" marker-end="url(#arrowBlue)"/>
+    <!-- dim_product -> fact_budget_forecast -->
+    <path d="M545,90 L545,92 L818,92 L818,482 L600,482 L600,490" stroke="#2b6cb0" stroke-width="1.1" marker-end="url(#arrowBlue)"/>
+    <!-- dim_application -> fact_consumption -->
+    <path d="M545,300 L545,304 L802,304 L802,483 L350,483 L350,490" stroke="#2b6cb0" stroke-width="1.1" marker-end="url(#arrowBlue)"/>
+  </g>
+
+  <!-- dimensions -->
+  <g>
+    <rect x="60" y="40" width="150" height="50" rx="4" fill="#e1f5ee" stroke="#0f6e56"/>
+    <text x="135" y="62" font-size="14" font-weight="600" fill="#04342c" text-anchor="middle">DIM_DATE</text>
+    <text x="135" y="80" font-size="12" fill="#0f6e56" text-anchor="middle">month grain</text>
+  </g>
+  <g>
+    <rect x="470" y="40" width="150" height="50" rx="4" fill="#e1f5ee" stroke="#0f6e56"/>
+    <text x="545" y="62" font-size="14" font-weight="600" fill="#04342c" text-anchor="middle">DIM_PRODUCT</text>
+    <text x="545" y="80" font-size="12" fill="#0f6e56" text-anchor="middle">category, driver</text>
+  </g>
+  <g>
+    <rect x="650" y="40" width="150" height="50" rx="4" fill="#fffaf0" stroke="#b7791f"/>
+    <text x="725" y="60" font-size="11.5" font-weight="600" fill="#7c5a10" text-anchor="middle">BRIDGE_PRODUCT_</text>
+    <text x="725" y="75" font-size="11.5" font-weight="600" fill="#7c5a10" text-anchor="middle">FUNDING_PROGRAM</text>
+  </g>
+  <g>
+    <rect x="60" y="300" width="150" height="50" rx="4" fill="#e1f5ee" stroke="#0f6e56"/>
+    <text x="135" y="322" font-size="14" font-weight="600" fill="#04342c" text-anchor="middle">DIM_COST_POOL</text>
+    <text x="135" y="340" font-size="12" fill="#0f6e56" text-anchor="middle">overhead flag</text>
+  </g>
+  <g>
+    <rect x="470" y="300" width="150" height="50" rx="4" fill="#e1f5ee" stroke="#0f6e56"/>
+    <text x="545" y="322" font-size="14" font-weight="600" fill="#04342c" text-anchor="middle">DIM_APPLICATION</text>
+    <text x="545" y="340" font-size="12" fill="#0f6e56" text-anchor="middle">criticality</text>
+  </g>
+
+  <!-- central fact -->
+  <g>
+    <rect x="240" y="150" width="220" height="100" rx="6" fill="#eeedfe" stroke="#534ab7"/>
+    <text x="350" y="185" font-size="14" font-weight="600" fill="#26215c" text-anchor="middle">FCT_FULLY_LOADED_COST</text>
+    <text x="350" y="205" font-size="12" fill="#534ab7" text-anchor="middle">date &#215; pool &#215; product &#215; app</text>
+    <text x="350" y="223" font-size="12" fill="#534ab7" text-anchor="middle">direct + overhead + loaded</text>
+  </g>
+
+  <!-- disconnected what-if parameter -->
+  <g>
+    <rect x="240" y="400" width="220" height="46" rx="4" fill="#faeeda" stroke="#ba7517" stroke-dasharray="4 3"/>
+    <text x="350" y="422" font-size="14" font-weight="600" fill="#633806" text-anchor="middle">Cloud Migration %</text>
+    <text x="350" y="438" font-size="12" fill="#854f0b" text-anchor="middle">disconnected (what-if)</text>
+  </g>
+
+  <!-- satellite facts -->
+  <g>
+    <rect x="60" y="490" width="330" height="70" rx="6" fill="#f5f9ff" stroke="#2b6cb0"/>
+    <text x="225" y="514" font-size="13.5" font-weight="600" fill="#1e4e7a" text-anchor="middle">FACT_CONSUMPTION</text>
+    <text x="225" y="532" font-size="11" fill="#2c5885" text-anchor="middle">date &#215; product &#215; app &#215; region &#215; entity &#215; driver</text>
+    <text x="225" y="548" font-size="10.5" fill="#4a7bab" text-anchor="middle">driver_qty — unit-cost denominator</text>
+  </g>
+  <g>
+    <rect x="430" y="490" width="330" height="70" rx="6" fill="#f5f9ff" stroke="#2b6cb0"/>
+    <text x="595" y="514" font-size="13.5" font-weight="600" fill="#1e4e7a" text-anchor="middle">FACT_BUDGET_FORECAST</text>
+    <text x="595" y="532" font-size="11" fill="#2c5885" text-anchor="middle">date &#215; product</text>
+    <text x="595" y="548" font-size="10.5" fill="#4a7bab" text-anchor="middle">budget_usd, forecast_usd</text>
+  </g>
+
+  <!-- notes -->
+  <text x="415" y="584" font-size="11" fill="#9c6b1f" text-anchor="middle">BRIDGE_PRODUCT_FUNDING_PROGRAM relates to the fact on product_id (funding request/program rollup); DIM_FUNDING_REQUEST and DIM_PROGRAM feed it at build time only (not shown).</text>
+  <text x="415" y="602" font-size="10" fill="#718096" text-anchor="middle">All relationships are single-direction, one-to-many, dimension → fact.</text>
+</svg>

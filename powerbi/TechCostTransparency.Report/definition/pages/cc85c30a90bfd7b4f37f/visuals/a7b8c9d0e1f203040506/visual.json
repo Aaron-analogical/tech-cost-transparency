@@ -1,0 +1,115 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "a7b8c9d0e1f203040506",
+  "position": {
+    "x": 410.14925373134326,
+    "y": 19.701492537313431,
+    "z": 1000,
+    "height": 100.29850746268656,
+    "width": 390.44776119402985,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Vendor Increase %"
+                    }
+                  },
+                  "Property": "Parameter"
+                }
+              },
+              "queryRef": "Vendor Increase %.Parameter",
+              "nativeQueryRef": "Vendor Rate Increase %",
+              "displayName": "Vendor Rate Increase %",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "numericStart": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.08D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "v",
+                    "Entity": "Vendor Increase %",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "v"
+                              }
+                            },
+                            "Property": "Parameter"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "0.08D"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3bb4e5f8e5f7e6cbg185",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Vendor Increase %"
+              }
+            },
+            "Property": "Parameter"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

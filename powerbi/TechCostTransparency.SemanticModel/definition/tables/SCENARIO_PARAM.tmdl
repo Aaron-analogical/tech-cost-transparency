@@ -1,0 +1,42 @@
+table SCENARIO_PARAM
+	lineageTag: fc198f8a-bd32-4f3f-8f14-674e43821d2a
+
+	column SCENARIO_ID
+		dataType: string
+		lineageTag: 9e6ccefb-bf1d-408f-8e3f-2226bf44fdd4
+		summarizeBy: none
+		sourceColumn: SCENARIO_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PARAM_NAME
+		dataType: string
+		lineageTag: 4856c98a-8dd9-4ddd-a82f-11340d4fa05b
+		summarizeBy: none
+		sourceColumn: PARAM_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PARAM_VALUE
+		dataType: double
+		lineageTag: f519ff58-578b-4acd-9e3b-7bea09ec4d08
+		summarizeBy: sum
+		sourceColumn: PARAM_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition SCENARIO_PARAM = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    SCENARIO_PARAM_Table = MERIDIAN_Schema{[Name="SCENARIO_PARAM",Kind="Table"]}[Data]
+				in
+				    SCENARIO_PARAM_Table
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,49 @@
+table DIM_COST_POOL
+	lineageTag: f2def979-1033-42ff-989e-871ffe0617bc
+
+	column COST_POOL_ID
+		dataType: string
+		lineageTag: 708669ad-9b4b-4994-a556-62cd51337774
+		summarizeBy: none
+		sourceColumn: COST_POOL_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_POOL_NAME
+		dataType: string
+		lineageTag: e5a35d96-8b89-49bf-bf1f-016033d25b4f
+		summarizeBy: none
+		sourceColumn: COST_POOL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_POOL_TYPE
+		dataType: string
+		lineageTag: 821659a2-e1b8-45ce-aef2-52e1b3b13dd5
+		summarizeBy: none
+		sourceColumn: COST_POOL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_OVERHEAD
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8221406b-e5d2-4174-b0fd-9312f56f5564
+		summarizeBy: none
+		sourceColumn: IS_OVERHEAD
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_COST_POOL = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    DIM_COST_POOL_Table = MERIDIAN_Schema{[Name="DIM_COST_POOL",Kind="Table"]}[Data]
+				in
+				    DIM_COST_POOL_Table
+
+	annotation PBI_ResultType = Table
+

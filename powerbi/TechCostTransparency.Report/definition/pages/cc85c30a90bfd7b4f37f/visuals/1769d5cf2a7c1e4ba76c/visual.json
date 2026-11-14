@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "1769d5cf2a7c1e4ba76c",
+  "position": {
+    "x": 20,
+    "y": 140,
+    "z": 1001,
+    "height": 100,
+    "width": 290,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Fully-Loaded Cost"
+                }
+              },
+              "queryRef": "_Measure.Fully-Loaded Cost",
+              "nativeQueryRef": "Baseline Fully-Loaded Cost",
+              "displayName": "Baseline Fully-Loaded Cost"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

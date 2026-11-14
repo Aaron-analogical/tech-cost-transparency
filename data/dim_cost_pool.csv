@@ -1,0 +1,9 @@
+cost_pool_id,cost_pool_name,cost_pool_type,is_overhead
+CP01,Labour,Fixed,FALSE
+CP02,HW Depreciation,Fixed,FALSE
+CP03,Software Licences,Semi-variable,FALSE
+CP04,Data Centre & Facilities,Fixed,FALSE
+CP05,Public Cloud,Variable,FALSE
+CP06,Vendor / Managed Service,Semi-variable,FALSE
+CP07,Network,Semi-variable,FALSE
+CP99,Shared / Unallocated Overhead,Fixed,TRUE

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "drill_card_appcnt001",
+  "position": {
+    "x": 1059.6571428571428,
+    "y": 20.114285714285714,
+    "z": 0,
+    "height": 109.71428571428571,
+    "width": 200.22857142857143,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Application Count"
+                }
+              },
+              "queryRef": "_Measure.Application Count",
+              "nativeQueryRef": "Applications in Scope",
+              "displayName": "Applications in Scope"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,66 @@
+table FACT_ALLOCATION_MAP
+	lineageTag: 9704b591-b3e2-401b-a7e9-44141f47c9de
+
+	column MAP_ID
+		dataType: string
+		lineageTag: f52b8710-ff58-401f-bec3-e5fbcf6eff9c
+		summarizeBy: none
+		sourceColumn: MAP_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_POOL_ID
+		dataType: string
+		lineageTag: a53cbbcd-7b79-4eca-b66e-9af35b9ad765
+		summarizeBy: none
+		sourceColumn: COST_POOL_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: 0c60050c-4373-469b-b876-f73901be0155
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DRIVER_TYPE
+		dataType: string
+		lineageTag: 8d62e4c1-b36b-40a4-8793-5f8d7e461954
+		summarizeBy: none
+		sourceColumn: DRIVER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ALLOC_METHOD
+		dataType: string
+		lineageTag: 4f0b03af-8ebf-41b1-aa16-9bce305c5315
+		summarizeBy: none
+		sourceColumn: ALLOC_METHOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIXED_WEIGHT
+		dataType: double
+		lineageTag: a6cc4e94-b042-4e54-b122-872d5f0edff4
+		summarizeBy: sum
+		sourceColumn: FIXED_WEIGHT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_ALLOCATION_MAP = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    FACT_ALLOCATION_MAP_Table = MERIDIAN_Schema{[Name="FACT_ALLOCATION_MAP",Kind="Table"]}[Data]
+				in
+				    FACT_ALLOCATION_MAP_Table
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,40 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["FCT_FULLY_LOADED_COST","DIM_APPLICATION","DIM_COST_POOL","DIM_FUNDING_REQUEST","DIM_PRODUCT","DIM_PROGRAM","FACT_ALLOCATION_MAP","FACT_BUDGET_FORECAST","FACT_CONSUMPTION","FACT_GL_COST","SCENARIO_PARAM","VW_VARIANCE","VW_SCENARIO_BY_PRODUCT","VW_SCENARIO_BY_APPLICATION","VW_COST_BY_FUNDING_REQUEST","DIM_DATE","BRIDGE_PRODUCT_FUNDING_PROGRAM"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table What-if
+ref table FCT_FULLY_LOADED_COST
+ref table DIM_APPLICATION
+ref table DIM_COST_POOL
+ref table DIM_FUNDING_REQUEST
+ref table DIM_PRODUCT
+ref table DIM_PROGRAM
+ref table FACT_ALLOCATION_MAP
+ref table FACT_BUDGET_FORECAST
+ref table FACT_CONSUMPTION
+ref table FACT_GL_COST
+ref table SCENARIO_PARAM
+ref table VW_VARIANCE
+ref table VW_SCENARIO_BY_PRODUCT
+ref table VW_SCENARIO_BY_APPLICATION
+ref table VW_COST_BY_FUNDING_REQUEST
+ref table _Measure
+ref table DIM_DATE
+ref table DateTableTemplate_ef5c0333-d68b-4118-92e7-6ff00eb084cd
+ref table LocalDateTable_bc262837-7e74-40cc-9295-f7fddb0dce1f
+ref table BRIDGE_PRODUCT_FUNDING_PROGRAM
+ref table Product/App/FR/Program
+ref table 'Vendor Increase %'
+
+ref cultureInfo en-CA
+

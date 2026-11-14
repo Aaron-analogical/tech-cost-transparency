@@ -1,0 +1,254 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1065" viewBox="0 0 1600 1065" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#b7791f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#1a202c" flood-opacity="0.12"/>
+    </filter>
+    <symbol id="tblicon" viewBox="0 0 14 14">
+      <rect x="0.6" y="0.6" width="12.8" height="12.8" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <line x1="0.6" y1="5.2" x2="13.4" y2="5.2" stroke="currentColor" stroke-width="1.1"/>
+      <line x1="5.4" y1="5.2" x2="5.4" y2="13.4" stroke="currentColor" stroke-width="1.1"/>
+    </symbol>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="1065" fill="#f6f7f9"/>
+
+  <!-- title -->
+  <text x="30" y="30" font-size="16.5" font-weight="700" fill="#1a202c">Meridian Semantic Model — Star Schema</text>
+  <text x="30" y="48" font-size="11" fill="#5f6b7a">Cost &amp; budget domain · matches Source-to-target ER in A_Data_Model.md</text>
+
+  <!-- ===================== connectors (orthogonal, routed in dedicated lanes) ===================== -->
+  <g fill="none" stroke-linejoin="round">
+    <!-- core star: dim -> fct, straight verticals -->
+    <path d="M170,350 L170,460" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+    <path d="M440,350 L440,460" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+    <path d="M710,350 L710,460" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+    <path d="M980,370 L980,460" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+    <!-- dim_funding_request -> bridge_product_funding_program (build-time input, not a live relationship) -->
+    <path d="M1255,184 L1255,200 L1300,200 L1300,230" stroke="#9aa5b1" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+    <!-- dim_program -> bridge_product_funding_program (build-time input, not a live relationship) -->
+    <path d="M1495,184 L1495,200 L1410,200 L1410,230" stroke="#9aa5b1" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+    <!-- bridge_product_funding_program -> fct (product_id, live relationship, carries the modeling assumption) -->
+    <path d="M1240,340 L1050,340 L1050,460" stroke="#b7791f" stroke-width="1.3" marker-end="url(#arrowAmber)"/>
+
+    <!-- shared dims -> satellite facts, routed in the gap band below the core fact -->
+    <path d="M980,370 L980,392 L1108,392 L1108,815 L300,815 L300,850" stroke="#2b6cb0" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
+    <path d="M980,370 L980,402 L1128,402 L1128,825 L860,825 L860,850" stroke="#2b6cb0" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
+    <path d="M710,350 L710,412 L1148,412 L1148,835 L340,835 L340,850" stroke="#2b6cb0" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
+    <path d="M710,350 L710,422 L1168,422 L1168,845 L900,845 L900,850" stroke="#2b6cb0" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
+    <!-- dim_application -> fact_consumption, left outer lane -->
+    <path d="M60,300 L24,300 L24,900 L60,900" stroke="#2b6cb0" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
+    <!-- dim_funding_request -> fact_budget_forecast, right outer lane -->
+    <path d="M1360,122 L1576,122 L1576,900 L1100,900" stroke="#2b6cb0" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
+  </g>
+
+  <!-- endpoint dots for clarity -->
+  <g fill="#94a3b8">
+    <circle cx="170" cy="350" r="2.6"/><circle cx="440" cy="350" r="2.6"/>
+    <circle cx="710" cy="350" r="2.6"/><circle cx="980" cy="370" r="2.6"/>
+  </g>
+  <g fill="#9aa5b1">
+    <circle cx="1255" cy="184" r="2.6"/><circle cx="1495" cy="184" r="2.6"/>
+  </g>
+  <g fill="#b7791f">
+    <circle cx="1240" cy="340" r="2.6"/>
+  </g>
+  <g fill="#2b6cb0">
+    <circle cx="60" cy="300" r="2.6"/><circle cx="1360" cy="122" r="2.6"/>
+  </g>
+
+  <!-- cardinality glyphs (core star) -->
+  <text x="178" y="410" font-size="10.5" font-weight="600" fill="#5f6b7a">1  *</text>
+  <text x="448" y="410" font-size="10.5" font-weight="600" fill="#5f6b7a">1  *</text>
+  <text x="718" y="410" font-size="10.5" font-weight="600" fill="#5f6b7a">1  *</text>
+  <text x="988" y="418" font-size="10.5" font-weight="600" fill="#5f6b7a">1  *</text>
+  <text x="1264" y="192" font-size="10.5" font-weight="600" fill="#5f6b7a">1  * (build-time)</text>
+  <text x="1418" y="192" font-size="10.5" font-weight="600" fill="#5f6b7a">1  * (build-time)</text>
+  <text x="1058" y="400" font-size="10.5" font-weight="600" fill="#8a5a10" text-anchor="start">*  1</text>
+
+  <!-- ===================== dim_application ===================== -->
+  <g color="#0f6e56">
+    <rect x="60" y="200" width="220" height="150" rx="8" fill="#ffffff" stroke="#dfe6ea" stroke-width="1.2" filter="url(#cardShadow)"/>
+    <rect x="60" y="200" width="220" height="4" rx="2" fill="#0f6e56"/>
+    <use href="#tblicon" x="74" y="216" width="14" height="14"/>
+    <text x="94" y="227" font-size="13.5" font-weight="600" fill="#1a202c">dim_application</text>
+    <line x1="74" y1="238" x2="260" y2="238" stroke="#eef1f3"/>
+    <text x="74" y="258" font-size="11" fill="#3d4a5c">application_id</text>
+    <text x="74" y="278" font-size="11" fill="#5f6b7a">application_name</text>
+    <text x="74" y="298" font-size="11" fill="#5f6b7a">criticality</text>
+    <text x="74" y="318" font-size="11" fill="#5f6b7a">product_id</text>
+  </g>
+
+  <!-- ===================== dim_cost_pool ===================== -->
+  <g color="#0f6e56">
+    <rect x="330" y="200" width="220" height="150" rx="8" fill="#ffffff" stroke="#dfe6ea" stroke-width="1.2" filter="url(#cardShadow)"/>
+    <rect x="330" y="200" width="220" height="4" rx="2" fill="#0f6e56"/>
+    <use href="#tblicon" x="344" y="216" width="14" height="14"/>
+    <text x="364" y="227" font-size="13.5" font-weight="600" fill="#1a202c">dim_cost_pool</text>
+    <line x1="344" y1="238" x2="530" y2="238" stroke="#eef1f3"/>
+    <text x="344" y="258" font-size="11" fill="#3d4a5c">cost_pool_id</text>
+    <text x="344" y="278" font-size="11" fill="#5f6b7a">cost_pool_name</text>
+    <text x="344" y="298" font-size="11" fill="#5f6b7a">cost_pool_type</text>
+    <text x="344" y="318" font-size="11" fill="#5f6b7a">is_overhead</text>
+  </g>
+
+  <!-- ===================== dim_product ===================== -->
+  <g color="#0f6e56">
+    <rect x="600" y="200" width="220" height="150" rx="8" fill="#ffffff" stroke="#dfe6ea" stroke-width="1.2" filter="url(#cardShadow)"/>
+    <rect x="600" y="200" width="220" height="4" rx="2" fill="#0f6e56"/>
+    <use href="#tblicon" x="614" y="216" width="14" height="14"/>
+    <text x="634" y="227" font-size="13.5" font-weight="600" fill="#1a202c">dim_product</text>
+    <line x1="614" y1="238" x2="800" y2="238" stroke="#eef1f3"/>
+    <text x="614" y="258" font-size="11" fill="#3d4a5c">product_id</text>
+    <text x="614" y="278" font-size="11" fill="#5f6b7a">product_name</text>
+    <text x="614" y="298" font-size="11" fill="#5f6b7a">product_category</text>
+    <text x="614" y="318" font-size="11" fill="#5f6b7a">primary_driver</text>
+  </g>
+
+  <!-- ===================== dim_date ===================== -->
+  <g color="#0f6e56">
+    <rect x="870" y="200" width="220" height="170" rx="8" fill="#ffffff" stroke="#dfe6ea" stroke-width="1.2" filter="url(#cardShadow)"/>
+    <rect x="870" y="200" width="220" height="4" rx="2" fill="#0f6e56"/>
+    <use href="#tblicon" x="884" y="216" width="14" height="14"/>
+    <text x="904" y="227" font-size="13.5" font-weight="600" fill="#1a202c">dim_date</text>
+    <line x1="884" y1="238" x2="1070" y2="238" stroke="#eef1f3"/>
+    <text x="884" y="256" font-size="11" fill="#3d4a5c">date_key</text>
+    <text x="884" y="274" font-size="11" fill="#5f6b7a">fiscal_year</text>
+    <text x="884" y="292" font-size="11" fill="#5f6b7a">month_name</text>
+    <text x="884" y="310" font-size="11" fill="#5f6b7a">month_start</text>
+    <text x="884" y="328" font-size="11" fill="#5f6b7a">quarter</text>
+  </g>
+
+  <!-- ===================== dim_funding_request ===================== -->
+  <g color="#0f6e56">
+    <rect x="1150" y="60" width="210" height="124" rx="8" fill="#ffffff" stroke="#dfe6ea" stroke-width="1.2" filter="url(#cardShadow)"/>
+    <rect x="1150" y="60" width="210" height="4" rx="2" fill="#0f6e56"/>
+    <use href="#tblicon" x="1164" y="76" width="14" height="14"/>
+    <text x="1184" y="87" font-size="13" font-weight="600" fill="#1a202c">dim_funding_request</text>
+    <text x="1340" y="101" font-size="9.5" font-weight="600" fill="#5f6b7a" text-anchor="end">build-time source</text>
+    <line x1="1164" y1="110" x2="1340" y2="110" stroke="#eef1f3"/>
+    <text x="1164" y="128" font-size="11" fill="#3d4a5c">funding_request_id</text>
+    <text x="1164" y="146" font-size="11" fill="#5f6b7a">funding_request_name</text>
+    <text x="1164" y="164" font-size="11" fill="#5f6b7a">program_id</text>
+  </g>
+
+  <!-- ===================== dim_program ===================== -->
+  <g color="#0f6e56">
+    <rect x="1390" y="60" width="210" height="124" rx="8" fill="#ffffff" stroke="#dfe6ea" stroke-width="1.2" filter="url(#cardShadow)"/>
+    <rect x="1390" y="60" width="210" height="4" rx="2" fill="#0f6e56"/>
+    <use href="#tblicon" x="1404" y="76" width="14" height="14"/>
+    <text x="1424" y="87" font-size="13" font-weight="600" fill="#1a202c">dim_program</text>
+    <text x="1580" y="101" font-size="9.5" font-weight="600" fill="#5f6b7a" text-anchor="end">build-time source</text>
+    <line x1="1404" y1="110" x2="1580" y2="110" stroke="#eef1f3"/>
+    <text x="1404" y="128" font-size="11" fill="#3d4a5c">program_id</text>
+    <text x="1404" y="146" font-size="11" fill="#5f6b7a">program_name</text>
+    <text x="1404" y="164" font-size="11" fill="#5f6b7a">program_owner</text>
+  </g>
+
+  <!-- ===================== bridge_product_funding_program ===================== -->
+  <g color="#b7791f">
+    <rect x="1240" y="230" width="230" height="170" rx="8" fill="#fffaf0" stroke="#e9c583" stroke-width="1.3" filter="url(#cardShadow)"/>
+    <rect x="1240" y="230" width="230" height="4" rx="2" fill="#b7791f"/>
+    <use href="#tblicon" x="1254" y="246" width="14" height="14"/>
+    <text x="1274" y="257" font-size="12.5" font-weight="600" fill="#7c5a10">bridge_product_funding_</text>
+    <text x="1274" y="270" font-size="12.5" font-weight="600" fill="#7c5a10">program</text>
+    <line x1="1254" y1="280" x2="1460" y2="280" stroke="#f3e5c4"/>
+    <text x="1254" y="298" font-size="11" fill="#5c4109">funding_request_id</text>
+    <text x="1254" y="316" font-size="11" fill="#9c6b1f">funding_request_name</text>
+    <text x="1254" y="334" font-size="11" fill="#9c6b1f">product_id</text>
+    <text x="1254" y="352" font-size="11" fill="#9c6b1f">program_id</text>
+    <text x="1254" y="370" font-size="11" fill="#9c6b1f">program_name</text>
+  </g>
+
+  <!-- ===================== central fact ===================== -->
+  <g color="#4c3fc7">
+    <rect x="60" y="460" width="1030" height="300" rx="9" fill="#ffffff" stroke="#d9d5f5" stroke-width="1.3" filter="url(#cardShadow)"/>
+    <rect x="60" y="460" width="1030" height="5" rx="2.5" fill="#4c3fc7"/>
+    <use href="#tblicon" x="80" y="480" width="15" height="15"/>
+    <text x="102" y="492" font-size="14.5" font-weight="700" fill="#26215c">fct_fully_loaded_cost</text>
+    <text x="1070" y="492" font-size="10" fill="#8079b8" text-anchor="end">grain: date_key × cost_pool_id × product_id × application_id</text>
+    <line x1="80" y1="504" x2="1070" y2="504" stroke="#e6e3fa"/>
+
+    <g font-size="11.5">
+      <text x="140" y="536" font-weight="600" fill="#26215c" text-anchor="middle">date_key</text>
+      <text x="140" y="552" font-size="9" fill="#8079b8" text-anchor="middle">← dim_date</text>
+
+      <text x="440" y="536" font-weight="600" fill="#26215c" text-anchor="middle">cost_pool_id</text>
+      <text x="440" y="552" font-size="9" fill="#8079b8" text-anchor="middle">← dim_cost_pool</text>
+
+      <text x="740" y="536" font-weight="600" fill="#26215c" text-anchor="middle">product_id</text>
+      <text x="740" y="552" font-size="9" fill="#8079b8" text-anchor="middle">← dim_product / bridge_product_funding_program</text>
+
+      <text x="990" y="536" font-weight="600" fill="#26215c" text-anchor="middle">application_id</text>
+      <text x="990" y="552" font-size="9" fill="#8079b8" text-anchor="middle">← dim_application</text>
+    </g>
+
+    <line x1="80" y1="574" x2="1070" y2="574" stroke="#e6e3fa"/>
+
+    <text x="80" y="600" font-size="11.5" fill="#26215c">direct_and_alloc_usd</text>
+    <text x="1070" y="600" font-size="9.5" fill="#8079b8" text-anchor="end">NUMBER</text>
+    <text x="80" y="624" font-size="11.5" fill="#26215c">overhead_loading_usd</text>
+    <text x="1070" y="624" font-size="9.5" fill="#8079b8" text-anchor="end">NUMBER</text>
+
+    <rect x="70" y="636" width="1010" height="24" rx="4" fill="#f1effc"/>
+    <text x="80" y="653" font-size="11.5" font-weight="700" fill="#26215c">fully_loaded_usd</text>
+    <text x="1070" y="653" font-size="9.5" fill="#6b5fc9" text-anchor="end">= direct_and_alloc_usd + overhead_loading_usd</text>
+
+    <text x="575" y="690" font-size="9.5" fill="#6b5fc9" text-anchor="middle">reconciles to GL ± rounding</text>
+    <line x1="80" y1="710" x2="1070" y2="710" stroke="#e6e3fa"/>
+    <text x="575" y="732" font-size="9.5" fill="#8079b8" text-anchor="middle">satellite facts share date_key / product_id / application_id / funding_request_id with the dims above — routed below, around this box</text>
+  </g>
+
+  <!-- ===================== fact_consumption ===================== -->
+  <g color="#2b6cb0">
+    <rect x="60" y="850" width="480" height="140" rx="9" fill="#f5f9ff" stroke="#bcd6f2" stroke-width="1.3" filter="url(#cardShadow)"/>
+    <rect x="60" y="850" width="480" height="5" rx="2.5" fill="#2b6cb0"/>
+    <use href="#tblicon" x="78" y="868" width="14" height="14"/>
+    <text x="98" y="880" font-size="13.5" font-weight="700" fill="#1e4e7a">fact_consumption</text>
+    <text x="522" y="880" font-size="9.5" fill="#4a7bab" text-anchor="end">satellite</text>
+    <line x1="78" y1="892" x2="522" y2="892" stroke="#dcebfa"/>
+    <text x="78" y="914" font-size="11" fill="#2c5885">date_key · product_id · application_id</text>
+    <text x="78" y="934" font-size="11" fill="#4a7bab">region · legal_entity · driver</text>
+    <text x="78" y="958" font-size="9.5" fill="#6d94b8">retained as delivered — allocation weights &amp; unit-cost denominator</text>
+    <text x="78" y="974" font-size="9.5" fill="#6d94b8">grain: date × product × application × region × entity × driver</text>
+  </g>
+
+  <!-- ===================== fact_budget_forecast ===================== -->
+  <g color="#2b6cb0">
+    <rect x="620" y="850" width="480" height="140" rx="9" fill="#f5f9ff" stroke="#bcd6f2" stroke-width="1.3" filter="url(#cardShadow)"/>
+    <rect x="620" y="850" width="480" height="5" rx="2.5" fill="#2b6cb0"/>
+    <use href="#tblicon" x="638" y="868" width="14" height="14"/>
+    <text x="658" y="880" font-size="13.5" font-weight="700" fill="#1e4e7a">fact_budget_forecast</text>
+    <text x="1082" y="880" font-size="9.5" fill="#4a7bab" text-anchor="end">satellite</text>
+    <line x1="638" y1="892" x2="1082" y2="892" stroke="#dcebfa"/>
+    <text x="638" y="914" font-size="11" fill="#2c5885">date_key · product_id · funding_request_id</text>
+    <text x="638" y="934" font-size="11" fill="#4a7bab">budget_usd · forecast_usd</text>
+    <text x="638" y="958" font-size="9.5" fill="#6d94b8">deduplicated funding_request_id → product_id feeds</text>
+    <text x="638" y="974" font-size="9.5" fill="#6d94b8">the BRIDGE_PRODUCT_FUNDING_PROGRAM table above</text>
+  </g>
+
+  <!-- ===================== legend & footnote ===================== -->
+  <line x1="30" y1="1000" x2="1570" y2="1000" stroke="#e2e6eb"/>
+  <rect x="30" y="1012" width="12" height="12" rx="3" fill="#ffffff" stroke="#0f6e56" stroke-width="1.3"/>
+  <text x="49" y="1022" font-size="11.5" fill="#4a5568">conformed dimension</text>
+  <rect x="230" y="1012" width="12" height="12" rx="3" fill="#ffffff" stroke="#4c3fc7" stroke-width="1.3"/>
+  <text x="249" y="1022" font-size="11.5" fill="#4a5568">core fact (mart)</text>
+  <rect x="410" y="1012" width="12" height="12" rx="3" fill="#f5f9ff" stroke="#2b6cb0" stroke-width="1.3"/>
+  <text x="429" y="1022" font-size="11.5" fill="#4a5568">satellite fact (retained-as-delivered)</text>
+  <rect x="700" y="1012" width="12" height="12" rx="3" fill="#fffaf0" stroke="#b7791f" stroke-width="1.3"/>
+  <text x="719" y="1022" font-size="11.5" fill="#4a5568">bridge table carrying a modeling assumption</text>
+  <line x1="990" y1="1018" x2="1010" y2="1018" stroke="#9aa5b1" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="1016" y="1022" font-size="11.5" fill="#4a5568">build-time input only (not related to the fact directly)</text>
+
+  <text x="30" y="1040" font-size="10.5" font-style="italic" fill="#8a5a10">△ bridge_product_funding_program assumes PRODUCT_ID is unique in fact_budget_forecast's funding_request_id → product_id mapping — each product maps to exactly one funding request (FR0004 intentionally unmapped).</text>
+  <text x="30" y="1054" font-size="10.5" font-style="italic" fill="#4a5568">dim_funding_request and dim_program feed bridge_product_funding_program at build time; dim_funding_request also keeps a separate, live relationship to fact_budget_forecast.</text>
+</svg>

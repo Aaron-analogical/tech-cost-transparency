@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "340d40494f74c2e0894a",
+  "position": {
+    "x": 586.97142857142853,
+    "y": 20.114285714285714,
+    "z": 0,
+    "height": 109.71428571428571,
+    "width": 234.05714285714285,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Cost per vCPU-hour"
+                }
+              },
+              "queryRef": "_Measure.Cost per vCPU-hour",
+              "nativeQueryRef": "Cost per vCPU-hour",
+              "displayName": "Cost per vCPU-hour"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

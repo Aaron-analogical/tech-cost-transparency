@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "var_card_actual0001",
+  "position": {
+    "x": 20,
+    "y": 100,
+    "z": 0,
+    "height": 100,
+    "width": 290,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Actual Cost (Pre-Overhead)"
+                }
+              },
+              "queryRef": "_Measure.Actual Cost (Pre-Overhead)",
+              "nativeQueryRef": "Actual Cost",
+              "displayName": "Actual Cost"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

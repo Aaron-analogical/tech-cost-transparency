@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "var_textbox_notes01",
+  "position": {
+    "x": 20,
+    "y": 530,
+    "z": 0,
+    "height": 170,
+    "width": 1240,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Top 3 Cost Drivers (Cost Pool): Labour $12.4M (31%), Public Cloud $9.3M (23%), HW Depreciation $6.3M (16%) — together ~70% of total spend. By product, the top 3 are Compute $20.1M, Database $4.8M, and End-User $3.8M.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "12px"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Notable variances: Compute is under budget and improving each month (-9.8% / -19.0% / -21.2% vs budget). Database is increasingly favorable (-19.6% / -36.9% / -39.8%). Cloud Platform is the only product consistently over budget all quarter, but narrowing toward breakeven (+14.0% / +9.8% / +1.4%).",
+                    "textStyle": {
+                      "fontSize": "11px"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Data gaps: Network has no actual/budget/forecast row for February. Storage, End-User, and Security lose budget/forecast coverage in later months, so their variance figures for those periods should be read as directional, not final.",
+                    "textStyle": {
+                      "fontSize": "11px",
+                      "fontItalic": true
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "b2c3d4e5f6071829304a",
+  "position": {
+    "x": 20.114285714285714,
+    "y": 209.37142857142857,
+    "z": 2,
+    "height": 442.51428571428573,
+    "width": 1239.7714285714285,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_PRODUCT"
+                    }
+                  },
+                  "Property": "PRODUCT_NAME"
+                }
+              },
+              "queryRef": "DIM_PRODUCT.PRODUCT_NAME",
+              "nativeQueryRef": "Product",
+              "active": true,
+              "displayName": "Product"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_APPLICATION"
+                    }
+                  },
+                  "Property": "APPLICATION_NAME"
+                }
+              },
+              "queryRef": "DIM_APPLICATION.APPLICATION_NAME",
+              "nativeQueryRef": "Application",
+              "active": true,
+              "displayName": "Application"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Product/App/FR/Program"
+                    }
+                  },
+                  "Property": "Product/App/FR/Program"
+                }
+              },
+              "index": 0,
+              "length": 2
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FCT_FULLY_LOADED_COST"
+                        }
+                      },
+                      "Property": "DIRECT_AND_ALLOC_USD"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(FCT_FULLY_LOADED_COST.DIRECT_AND_ALLOC_USD)",
+              "nativeQueryRef": "Direct + Alloc",
+              "displayName": "Direct + Alloc"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FCT_FULLY_LOADED_COST"
+                        }
+                      },
+                      "Property": "OVERHEAD_LOADING_USD"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(FCT_FULLY_LOADED_COST.OVERHEAD_LOADING_USD)",
+              "nativeQueryRef": "Overhead",
+              "displayName": "Overhead"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FCT_FULLY_LOADED_COST"
+                        }
+                      },
+                      "Property": "FULLY_LOADED_USD"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(FCT_FULLY_LOADED_COST.FULLY_LOADED_USD)",
+              "nativeQueryRef": "Fully-Loaded",
+              "displayName": "Fully-Loaded"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Allocation %"
+                }
+              },
+              "queryRef": "_Measure.Allocation %",
+              "nativeQueryRef": "Allocation %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "FCT_FULLY_LOADED_COST"
+                      }
+                    },
+                    "Property": "FULLY_LOADED_USD"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "DIM_PRODUCT.PRODUCT_NAME"
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "DIM_APPLICATION.APPLICATION_NAME"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,40 @@
+table DIM_FUNDING_REQUEST
+	lineageTag: a70eae74-d814-412b-8d25-0531312b88bd
+
+	column FUNDING_REQUEST_ID
+		dataType: string
+		lineageTag: c1db1b0d-83ca-4402-b0f6-fd2750b15f9d
+		summarizeBy: none
+		sourceColumn: FUNDING_REQUEST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNDING_REQUEST_NAME
+		dataType: string
+		lineageTag: 9ed9b9a7-fde1-4d36-b8f9-07d9f181fedc
+		summarizeBy: none
+		sourceColumn: FUNDING_REQUEST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROGRAM_ID
+		dataType: string
+		lineageTag: e74537bb-7d7e-4173-82f1-77acd8c84b19
+		summarizeBy: none
+		sourceColumn: PROGRAM_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_FUNDING_REQUEST = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    DIM_FUNDING_REQUEST_Table = MERIDIAN_Schema{[Name="DIM_FUNDING_REQUEST",Kind="Table"]}[Data]
+				in
+				    DIM_FUNDING_REQUEST_Table
+
+	annotation PBI_ResultType = Table
+

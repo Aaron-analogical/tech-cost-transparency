@@ -1,0 +1,50 @@
+table Product/App/FR/Program
+	lineageTag: 705c0a91-51a5-4c1b-93bb-83b635506a87
+
+	column Product/App/FR/Program
+		lineageTag: e2664937-c436-476f-8d40-d59b67541eae
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Product/App/FR/Program Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Product/App/FR/Program Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product/App/FR/Program Fields'
+		isHidden
+		lineageTag: 74766b96-4c4d-44d2-bc82-cd57e79766c4
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Product/App/FR/Program Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product/App/FR/Program Order'
+		isHidden
+		formatString: 0
+		lineageTag: 962114b2-09a9-4fb5-8970-7d376346d735
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product/App/FR/Program = calculated
+		mode: import
+		source =
+				{
+				    ("Program", NAMEOF('BRIDGE_PRODUCT_FUNDING_PROGRAM'[PROGRAM_NAME]), 0),
+				    ("Funding Request", NAMEOF('BRIDGE_PRODUCT_FUNDING_PROGRAM'[FUNDING_REQUEST_NAME]), 1),
+				    ("Product", NAMEOF('DIM_PRODUCT'[PRODUCT_NAME]), 2),
+				    ("Application", NAMEOF('DIM_APPLICATION'[APPLICATION_NAME]), 3)
+				}
+
+	annotation PBI_Id = f59d231ee6284fe2aa449b92303cf9ce
+

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian TBM — Power BI Dashboard Wireframes</title>
+<style>
+  :root{
+    --ink:#1a202c; --muted:#718096; --line:#cbd5e0; --bg:#f7fafc; --card:#ffffff;
+    --blue:#2b6cb0; --blue-l:#bee3f8; --gray:#a0aec0; --orange:#dd6b20; --green:#2f855a; --red:#c53030;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);margin:0;padding:32px;line-height:1.5}
+  h1{font-size:22px;font-weight:600;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:28px}
+  .screen{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:28px}
+  .screen-title{font-size:16px;font-weight:600;margin:0 0 2px}
+  .screen-tag{color:var(--blue);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;padding:10px;background:var(--bg);border:1px dashed var(--line);border-radius:8px;font-size:12px;color:var(--muted)}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 10px}
+  .grid{display:grid;gap:14px}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .two{grid-template-columns:1fr 1fr}
+  .kpi{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px}
+  .kpi .v{font-size:24px;font-weight:700}
+  .kpi .l{font-size:12px;color:var(--muted);margin-top:2px}
+  .panel{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px}
+  .panel h4{margin:0 0 12px;font-size:13px;font-weight:600}
+  .bar-row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:12px}
+  .bar-row .name{width:96px;color:var(--muted);flex:none;text-align:right}
+  .bar-track{flex:1;background:#e2e8f0;border-radius:3px;height:16px;overflow:hidden}
+  .bar-fill{display:block;height:16px;border-radius:3px;background:var(--blue)}
+  .bar-fill.amber{background:var(--orange)}
+  .bar-row .val{width:56px;flex:none;font-variant-numeric:tabular-nums;text-align:right}
+  .cols{display:flex;gap:24px;align-items:flex-end;height:150px;padding:8px 16px 0}
+  .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .col .b{width:56%;background:var(--blue);border-radius:3px 3px 0 0;min-height:4px}
+  .col .c{font-size:11px;color:var(--muted);margin-top:8px;white-space:nowrap}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .oh{color:var(--orange)}
+  .slider{appearance:none;-webkit-appearance:none;width:100%;height:6px;background:var(--blue-l);border-radius:3px;outline:none}
+  .slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--blue);cursor:pointer}
+  .notes{margin-top:14px;padding:12px 14px;background:#fffaf0;border:1px solid #f6e05e;border-radius:8px;font-size:12.5px}
+  .notes b{color:var(--ink)}
+  .pin{display:inline-block;min-width:18px;height:18px;line-height:18px;text-align:center;background:var(--orange);color:#fff;border-radius:50%;font-size:11px;font-weight:700;margin-right:6px}
+  .legend{font-size:11px;color:var(--muted);margin-top:10px}
+  .sw{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:middle;margin:0 4px 0 10px}
+  .delta-pos{color:var(--red);font-weight:600}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+  .seg button{border:none;background:#fff;color:var(--muted);font-size:12px;font-weight:600;padding:7px 14px;cursor:pointer;border-right:1px solid var(--line)}
+  .seg button:last-child{border-right:none}
+  .seg button.active{background:var(--blue);color:#fff}
+</style>
+</head>
+<body>
+
+<h1>Meridian Technology Infrastructure — Cost Transparency &amp; Scenarios</h1>
+<div class="sub">Power BI dashboard wireframes (annotated) · 3 screens · figures from the Q1 2025 model ($40.2M base)</div>
+
+<!-- SCREEN 1 -->
+<div class="screen">
+  <div class="screen-tag">Screen 1 of 3</div>
+  <div class="screen-title">Executive overview</div>
+  <div class="toolbar"><span class="chip">Period: Q1 2025</span><span class="chip">Program: All</span><span class="chip">Product: All</span><span class="chip">View: Fully-loaded</span></div>
+
+  <div class="grid kpis" style="margin-bottom:14px">
+    <div class="kpi"><div class="v">$40.2M</div><div class="l">Fully-loaded cost <span class="pin">1</span></div></div>
+    <div class="kpi"><div class="v">50%</div><div class="l">Compute share of total</div></div>
+    <div class="kpi"><div class="v">$3.2M</div><div class="l">Overhead loading (8%) <span class="pin">2</span></div></div>
+    <div class="kpi"><div class="v">+0.6%</div><div class="l">Actual vs budget</div></div>
+  </div>
+
+  <div class="grid two">
+    <div class="panel">
+      <h4>Fully-loaded cost by product</h4>
+      <div class="bar-row"><span class="name">Compute</span><span class="bar-track"><span class="bar-fill" style="width:100%"></span></span><span class="val">$20.1M</span></div>
+      <div class="bar-row"><span class="name">Database</span><span class="bar-track"><span class="bar-fill" style="width:24%"></span></span><span class="val">$4.8M</span></div>
+      <div class="bar-row"><span class="name">End-User</span><span class="bar-track"><span class="bar-fill" style="width:19%"></span></span><span class="val">$3.8M</span></div>
+      <div class="bar-row"><span class="name">Cloud Plat.</span><span class="bar-track"><span class="bar-fill" style="width:17%"></span></span><span class="val">$3.4M</span></div>
+      <div class="bar-row"><span class="name">Storage</span><span class="bar-track"><span class="bar-fill" style="width:16%"></span></span><span class="val">$3.2M</span></div>
+      <div class="bar-row"><span class="name">Security</span><span class="bar-track"><span class="bar-fill" style="width:15%"></span></span><span class="val">$2.9M</span></div>
+      <div class="bar-row"><span class="name">Network</span><span class="bar-track"><span class="bar-fill" style="width:9%"></span></span><span class="val">$1.9M</span></div>
+    </div>
+    <div class="panel">
+      <h4>Cost by pool</h4>
+      <div class="bar-row"><span class="name">Labour</span><span class="bar-track"><span class="bar-fill" style="width:100%"></span></span><span class="val">$12.4M</span></div>
+      <div class="bar-row"><span class="name">Public Cloud</span><span class="bar-track"><span class="bar-fill" style="width:75%"></span></span><span class="val">$9.3M</span></div>
+      <div class="bar-row"><span class="name">HW Deprec.</span><span class="bar-track"><span class="bar-fill" style="width:50%"></span></span><span class="val">$6.3M</span></div>
+      <div class="bar-row"><span class="name">Data Centre</span><span class="bar-track"><span class="bar-fill" style="width:27%"></span></span><span class="val">$3.4M</span></div>
+      <div class="bar-row"><span class="name">Overhead</span><span class="bar-track"><span class="bar-fill amber" style="width:26%"></span></span><span class="val oh">$3.2M</span></div>
+      <div class="bar-row"><span class="name">Vendor</span><span class="bar-track"><span class="bar-fill" style="width:21%"></span></span><span class="val">$2.6M</span></div>
+      <div class="bar-row"><span class="name">Network</span><span class="bar-track"><span class="bar-fill" style="width:14%"></span></span><span class="val">$1.8M</span></div>
+      <div class="bar-row"><span class="name">Software</span><span class="bar-track"><span class="bar-fill" style="width:11%"></span></span><span class="val">$1.3M</span></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <h4>Monthly fully-loaded trend <span class="pin">3</span></h4>
+    <div class="cols">
+      <div class="col"><div class="b" style="height:110px"></div><div class="c">Jan $18.2M</div></div>
+      <div class="col"><div class="b" style="height:68px"></div><div class="c">Feb $11.2M</div></div>
+      <div class="col"><div class="b" style="height:64px"></div><div class="c">Mar $10.7M</div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div><span class="pin">1</span><b>Fully-Loaded Cost</b> is the headline measure (direct + allocated + overhead). A toggle switches to pre-overhead for a like-for-like budget view.</div>
+    <div style="margin-top:6px"><span class="pin">2</span><b>Overhead loading is a distinct KPI and a distinct bar colour</b>, so the ~8% shared-overhead assumption is never hidden inside product costs.</div>
+    <div style="margin-top:6px"><span class="pin">3</span>The declining trend is data coverage (facts populate Jan to Mar), flagged so no one misreads it as a cost reduction.</div>
+  </div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen">
+  <div class="screen-tag">Screen 2 of 3</div>
+  <div class="screen-title">Cost transparency drill</div>
+  <div class="toolbar"><span class="chip">Drill: Program → Funding request → Product → Application</span><span class="chip">Period: Q1 2025</span></div>
+
+  <div class="grid two" style="margin-bottom:14px">
+    <div class="kpi"><div class="v">$5.05</div><div class="l">Unit cost, $ / vCPU-hour (Compute) <span class="pin">2</span></div></div>
+    <div class="kpi"><div class="v">Tier 1</div><div class="l">Filter: application criticality</div></div>
+  </div>
+
+  <div class="panel">
+    <h4>Fully-loaded cost by program and product <span class="pin">1</span></h4>
+    <table>
+      <thead><tr><th>Program</th><th>Funding request</th><th>Product</th><th class="num">Direct + alloc</th><th class="num">Overhead</th><th class="num">Fully-loaded</th></tr></thead>
+      <tbody>
+        <tr><td>Core Hosting Modernization</td><td>Compute Capacity Refresh</td><td>Compute</td><td class="num">$18.5M</td><td class="num oh">$1.6M</td><td class="num">$20.1M</td></tr>
+        <tr><td>Core Hosting Modernization</td><td>Database Platform Upgrade</td><td>Database</td><td class="num">$4.4M</td><td class="num oh">$0.4M</td><td class="num">$4.8M</td></tr>
+        <tr><td>Core Hosting Modernization</td><td>Storage Tiering Program</td><td>Storage</td><td class="num">$3.0M</td><td class="num oh">$0.2M</td><td class="num">$3.2M</td></tr>
+        <tr><td>Cloud Acceleration</td><td>Public Cloud Landing Zone</td><td>Cloud Platform</td><td class="num">$3.1M</td><td class="num oh">$0.3M</td><td class="num">$3.4M</td></tr>
+        <tr><td>Workplace &amp; Security Services</td><td>End-User Device Refresh</td><td>End-User</td><td class="num">$3.5M</td><td class="num oh">$0.3M</td><td class="num">$3.8M</td></tr>
+        <tr><td>Workplace &amp; Security Services</td><td>Zero-Trust Security Rollout</td><td>Security</td><td class="num">$2.7M</td><td class="num oh">$0.2M</td><td class="num">$2.9M</td></tr>
+        <tr><td>Network &amp; Connectivity Uplift</td><td>WAN Modernization</td><td>Network</td><td class="num">$1.8M</td><td class="num oh">$0.1M</td><td class="num">$1.9M</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes">
+    <div><span class="pin">1</span>A <b>decomposition matrix</b> drills Program → Funding request → Product → Application. Overhead sits in its own column so fully-loaded is always direct+alloc plus a visible loading.</div>
+    <div style="margin-top:6px"><span class="pin">2</span><b>Unit cost</b> ($/vCPU-hr, $/GB) turns absolute spend into an efficiency lens the CFO can compare across products.</div>
+  </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen">
+  <div class="screen-tag">Screen 3 of 3</div>
+  <div class="screen-title">Scenario what-if</div>
+  <div class="toolbar"><span class="chip">Live parameters</span><span class="chip">Before / after</span></div>
+
+  <div class="grid two" style="margin-bottom:14px">
+    <div class="panel">
+      <h4>Cloud migration % <span class="pin">1</span></h4>
+      <input class="slider" type="range" min="0" max="50" value="15">
+      <div style="font-size:12px;color:var(--muted);margin-top:6px">Set to 15% · cloud cost factor 1.10</div>
+    </div>
+    <div class="panel">
+      <h4>Vendor rate increase</h4>
+      <input class="slider" type="range" min="0" max="20" value="8">
+      <div style="font-size:12px;color:var(--muted);margin-top:6px">Set to +8% on managed-service pool</div>
+    </div>
+  </div>
+
+  <div class="grid kpis" style="margin-bottom:14px">
+    <div class="kpi"><div class="v">$40.17M</div><div class="l">Baseline fully-loaded</div></div>
+    <div class="kpi"><div class="v">+$50k</div><div class="l">Cloud migration delta <span class="delta-pos">+0.1%</span></div></div>
+    <div class="kpi"><div class="v">+$204k</div><div class="l">Vendor +8% delta <span class="delta-pos">+0.5%</span></div></div>
+    <div class="kpi"><div class="v">$40.43M</div><div class="l">Both scenarios applied</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="seg"><button>Cloud migration</button><button class="active">Vendor increase</button></div>
+    <h4>Before / after by product — vendor +8% <span class="pin">2</span></h4>
+    <div class="bar-row"><span class="name">Database</span><span class="bar-track"><span class="bar-fill" style="width:38%"></span></span><span class="val">$4.82M</span></div>
+    <div class="bar-row"><span class="name"></span><span class="bar-track"><span class="bar-fill amber" style="width:39%"></span></span><span class="val oh">$4.95M</span></div>
+    <div class="bar-row"><span class="name">Cloud Plat.</span><span class="bar-track"><span class="bar-fill" style="width:27%"></span></span><span class="val">$3.40M</span></div>
+    <div class="bar-row"><span class="name"></span><span class="bar-track"><span class="bar-fill amber" style="width:28%"></span></span><span class="val oh">$3.49M</span></div>
+    <div class="legend"><span class="sw" style="background:var(--blue)"></span>baseline<span class="sw" style="background:var(--orange)"></span>after scenario · vendor increase lands only on the two managed-service consumers</div>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <div class="seg"><button class="active">Cloud migration</button><button>Vendor increase</button></div>
+    <h4>Before / after by product — cloud migration 15% @ 1.10 <span class="pin">3</span></h4>
+    <div class="bar-row"><span class="name">Compute</span><span class="bar-track"><span class="bar-fill" style="width:100%"></span></span><span class="val">$20.08M</span></div>
+    <div class="bar-row"><span class="name"></span><span class="bar-track"><span class="bar-fill amber" style="width:100%"></span></span><span class="val oh">$20.10M</span></div>
+    <div class="bar-row"><span class="name">Storage</span><span class="bar-track"><span class="bar-fill" style="width:16%"></span></span><span class="val">$3.23M</span></div>
+    <div class="bar-row"><span class="name"></span><span class="bar-track"><span class="bar-fill amber" style="width:16%"></span></span><span class="val oh">$3.26M</span></div>
+    <div class="legend"><span class="sw" style="background:var(--blue)"></span>baseline<span class="sw" style="background:var(--orange)"></span>after scenario · cloud migration lands only on the two products Data Centre serves</div>
+  </div>
+
+  <div class="notes">
+    <div><span class="pin">1</span>The <b>Cloud migration %</b> slider is a Power BI what-if parameter driving <code>Scenario Cloud Delta</code>. Moving it recalculates the delta live for live what-if questions.</div>
+    <div style="margin-top:6px"><span class="pin">2</span><span class="pin">3</span><b>Scenario toggle:</b> the segmented control above each breakdown swaps the panel between the two scenarios — a bookmark-driven toggle (or a field-parameter slicer) bound to the same visual, so only one breakdown is on screen at a time in the real report; both are drawn here to show what each state looks like.</div>
+    <div style="margin-top:6px"><b>Sensitivity call-out:</b> the cloud migration sign flips with the cost factor (+$50k at 1.10, −$50k at 0.90). The vendor increase is linear and certain. This framing is the headline for the live Q&amp;A.</div>
+  </div>
+</div>
+
+</body>
+</html>

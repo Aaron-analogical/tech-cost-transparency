@@ -1,0 +1,13 @@
+application_id,application_name,product_id,criticality
+APP001,Trade Capture,PR01,Tier 1
+APP002,Market Data Hub,PR03,Tier 1
+APP003,Risk Engine,PR01,Tier 1
+APP004,Settlement Platform,PR03,Tier 1
+APP005,Client Portal,PR07,Tier 2
+APP006,Payments Gateway,PR01,Tier 1
+APP007,Wealth CRM,PR07,Tier 2
+APP008,Document Store,PR02,Tier 3
+APP009,Collaboration Suite,PR05,Tier 3
+APP010,Identity & Access,PR06,Tier 1
+APP011,Network Backbone,PR04,Tier 1
+APP012,Data Lake,PR02,Tier 2

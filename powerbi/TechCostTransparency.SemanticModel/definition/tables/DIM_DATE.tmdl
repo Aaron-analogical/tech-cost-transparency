@@ -1,0 +1,68 @@
+table DIM_DATE
+	lineageTag: e8833013-72db-4c88-b788-cd9ce79c80fe
+
+	column DATE_KEY
+		dataType: string
+		lineageTag: 5ff5132e-218e-489c-acca-25013cd34161
+		summarizeBy: none
+		sourceColumn: DATE_KEY
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH_START
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0c1ac782-447e-4bc1-8846-9fd7f20c16b2
+		summarizeBy: none
+		sourceColumn: MONTH_START
+
+		variation Variation
+			isDefault
+			relationship: 67d383ef-4558-4df1-825b-5b9552d4124a
+			defaultHierarchy: LocalDateTable_bc262837-7e74-40cc-9295-f7fddb0dce1f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MONTH_NAME
+		dataType: string
+		lineageTag: 07a366a7-cef3-40eb-b00f-fd77c0657a33
+		summarizeBy: none
+		sourceColumn: MONTH_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER
+		dataType: string
+		lineageTag: e71c89e6-fc9d-4b8e-ace7-bbfdd1dcaa9e
+		summarizeBy: none
+		sourceColumn: QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_YEAR
+		dataType: double
+		lineageTag: 386f18f3-a727-41a9-a966-a45e457310e3
+		summarizeBy: sum
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition DIM_DATE = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    DIM_DATE_Table = MERIDIAN_Schema{[Name="DIM_DATE",Kind="Table"]}[Data]
+				in
+				    DIM_DATE_Table
+
+	annotation PBI_ResultType = Table
+

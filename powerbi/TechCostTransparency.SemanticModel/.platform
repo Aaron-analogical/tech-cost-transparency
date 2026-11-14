@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "TechCostTransparency"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0833e56e-6b26-49c0-bcdf-da7421845e01"
+  }
+}

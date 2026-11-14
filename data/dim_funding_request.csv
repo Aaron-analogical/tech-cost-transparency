@@ -1,0 +1,9 @@
+funding_request_id,funding_request_name,program_id
+FR0001,Compute Capacity Refresh,PRG01
+FR0002,Database Platform Upgrade,PRG01
+FR0003,Public Cloud Landing Zone,PRG02
+FR0004,Cloud Migration Wave 1,PRG02
+FR0005,WAN Modernization,PRG03
+FR0006,Storage Tiering Program,PRG01
+FR0007,Zero-Trust Security Rollout,PRG04
+FR0008,End-User Device Refresh,PRG04

@@ -1,0 +1,74 @@
+table VW_SCENARIO_BY_PRODUCT
+	lineageTag: c2dc8cbc-2bb9-41df-ae19-87003ade3ec5
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: 7acd6470-2e77-469e-a921-949a570060c6
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASELINE_FL
+		dataType: double
+		lineageTag: dbefb9ba-03dd-46e8-938b-320b62866e46
+		summarizeBy: sum
+		sourceColumn: BASELINE_FL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column S1_FULLY_LOADED
+		dataType: double
+		lineageTag: d6e7333a-c990-4932-9698-ab385dbc0087
+		summarizeBy: sum
+		sourceColumn: S1_FULLY_LOADED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column S2_FULLY_LOADED
+		dataType: double
+		lineageTag: 3afdd0ac-826d-489d-986a-dc19e8b59b5e
+		summarizeBy: sum
+		sourceColumn: S2_FULLY_LOADED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column S1_DELTA
+		dataType: double
+		lineageTag: 41c98042-f344-4c3f-9186-fe694fdf26a2
+		summarizeBy: sum
+		sourceColumn: S1_DELTA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column S2_DELTA
+		dataType: double
+		lineageTag: d68f5978-362f-4fc5-b4fe-c3d4dc6fd075
+		summarizeBy: sum
+		sourceColumn: S2_DELTA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition VW_SCENARIO_BY_PRODUCT = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    VW_SCENARIO_BY_PRODUCT_View = MERIDIAN_Schema{[Name="VW_SCENARIO_BY_PRODUCT",Kind="View"]}[Data]
+				in
+				    VW_SCENARIO_BY_PRODUCT_View
+
+	annotation PBI_ResultType = Table
+

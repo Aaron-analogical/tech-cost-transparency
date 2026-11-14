@@ -1,0 +1,9 @@
+product_id,product_name,product_category,primary_driver
+PR01,Compute,Hosting,vCPU_HOURS
+PR02,Storage,Hosting,GB_STORED
+PR03,Database,Data Platform,vCPU_HOURS
+PR04,Network,Connectivity,GB_STORED
+PR05,End-User,Workplace,HEADCOUNT
+PR06,Security,Cyber,HEADCOUNT
+PR07,Cloud Platform,Hosting,vCPU_HOURS
+PR99,Shared Infrastructure,Shared,TICKETS

@@ -1,0 +1,122 @@
+table VW_VARIANCE
+	lineageTag: 36f6d492-a68d-458b-bd3f-0a87abe60dfa
+
+	column DATE_KEY
+		dataType: string
+		lineageTag: 67db3951-5bf7-445b-8902-9e8cfad6a2fd
+		summarizeBy: none
+		sourceColumn: DATE_KEY
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: f236baa0-d7a2-49b8-bc87-f96dbcb2a19e
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNDING_REQUEST_ID
+		dataType: string
+		lineageTag: ba59f01d-5946-433f-8a6d-22e1cc1f7f0b
+		summarizeBy: none
+		sourceColumn: FUNDING_REQUEST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTUAL_USD
+		dataType: double
+		lineageTag: 4b4c25e2-656c-4fa4-8024-68b93a3952f3
+		summarizeBy: sum
+		sourceColumn: ACTUAL_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OVERHEAD_USD
+		dataType: double
+		lineageTag: a4b7fd1d-7959-43ae-ac91-b94f50db7eb6
+		summarizeBy: sum
+		sourceColumn: OVERHEAD_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FULLY_LOADED_USD
+		dataType: double
+		lineageTag: 6c087f9d-79f2-4fe6-8c10-8108e0dde856
+		summarizeBy: sum
+		sourceColumn: FULLY_LOADED_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BUDGET_USD
+		dataType: double
+		lineageTag: 807c409e-b074-42e3-afbd-7255a1b732f5
+		summarizeBy: sum
+		sourceColumn: BUDGET_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FORECAST_USD
+		dataType: double
+		lineageTag: d062d251-28c4-4fa5-8a47-a2197e18a4c3
+		summarizeBy: sum
+		sourceColumn: FORECAST_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VAR_VS_BUDGET_USD
+		dataType: double
+		lineageTag: 8451502a-64f1-4f55-8e07-3dc63700b5e2
+		summarizeBy: sum
+		sourceColumn: VAR_VS_BUDGET_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VAR_VS_FORECAST_USD
+		dataType: double
+		lineageTag: 544bbba6-e66b-46c3-bcab-53ea3ec21737
+		summarizeBy: sum
+		sourceColumn: VAR_VS_FORECAST_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VAR_VS_BUDGET_PCT
+		dataType: double
+		lineageTag: bed2053d-00cd-4487-be86-c3eebdb631f9
+		summarizeBy: sum
+		sourceColumn: VAR_VS_BUDGET_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition VW_VARIANCE = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    VW_VARIANCE_View = MERIDIAN_Schema{[Name="VW_VARIANCE",Kind="View"]}[Data]
+				in
+				    VW_VARIANCE_View
+
+	annotation PBI_ResultType = Table
+

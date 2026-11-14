@@ -1,0 +1,28 @@
+table What-if
+	lineageTag: 65b7e822-0789-4b04-ad8f-742b139797f5
+
+	measure 'Parameter Value' = SELECTEDVALUE('What-if'[Parameter])
+		lineageTag: 60eabea5-d9e3-4f5e-9996-c05124ca27b9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Parameter
+		lineageTag: 8e401171-861a-421e-9894-afdf9368df29
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition What-if = calculated
+		mode: import
+		source = GENERATESERIES(0, 1, 0.05)
+
+	annotation PBI_Id = 03596e5e18a243e1876ef61e4f326de9
+

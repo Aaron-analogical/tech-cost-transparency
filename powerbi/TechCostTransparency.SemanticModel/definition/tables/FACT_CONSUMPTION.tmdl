@@ -1,0 +1,84 @@
+table FACT_CONSUMPTION
+	lineageTag: f1237ab2-ad56-478d-8f16-86fd5f38c3a1
+
+	column CONSUMPTION_ID
+		dataType: string
+		lineageTag: c08c3fce-ebd0-4a42-8dd6-439a66598b79
+		summarizeBy: none
+		sourceColumn: CONSUMPTION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_KEY
+		dataType: double
+		lineageTag: 8d60c482-0de7-47a5-ad5d-51e58a4db858
+		summarizeBy: none
+		sourceColumn: DATE_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: a92732a1-3027-4687-97ba-4a9460e6f396
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column APPLICATION_ID
+		dataType: string
+		lineageTag: 9d8309e2-13d4-4774-961a-689775e7960a
+		summarizeBy: none
+		sourceColumn: APPLICATION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION_ID
+		dataType: string
+		lineageTag: 08041e7b-264e-41b3-a958-00d7cf979320
+		summarizeBy: none
+		sourceColumn: REGION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEGAL_ENTITY_ID
+		dataType: string
+		lineageTag: b0e6b5a2-a4ce-40f3-b3ca-37efab7975e6
+		summarizeBy: none
+		sourceColumn: LEGAL_ENTITY_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DRIVER_TYPE
+		dataType: string
+		lineageTag: c17c0ef1-55e3-4577-afa4-d3b9d0041b4f
+		summarizeBy: none
+		sourceColumn: DRIVER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DRIVER_QTY
+		dataType: double
+		lineageTag: e87d8bd9-d5ab-496c-938f-2bfde18cb468
+		summarizeBy: sum
+		sourceColumn: DRIVER_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_CONSUMPTION = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    FACT_CONSUMPTION_Table = MERIDIAN_Schema{[Name="FACT_CONSUMPTION",Kind="Table"]}[Data]
+				in
+				    FACT_CONSUMPTION_Table
+
+	annotation PBI_ResultType = Table
+

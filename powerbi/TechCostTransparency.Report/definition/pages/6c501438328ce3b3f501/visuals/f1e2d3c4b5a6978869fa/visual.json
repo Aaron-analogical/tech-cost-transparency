@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "f1e2d3c4b5a6978869fa",
+  "position": {
+    "x": 309.85074626865674,
+    "y": 113.73134328358209,
+    "z": 0,
+    "height": 85.970149253731336,
+    "width": 290.14925373134326,
+    "tabOrder": 6001
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FCT_FULLY_LOADED_COST"
+                        }
+                      },
+                      "Property": "OVERHEAD_LOADING_USD"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(FCT_FULLY_LOADED_COST.OVERHEAD_LOADING_USD)",
+              "nativeQueryRef": "Overhead Loading $",
+              "displayName": "Overhead Loading $"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

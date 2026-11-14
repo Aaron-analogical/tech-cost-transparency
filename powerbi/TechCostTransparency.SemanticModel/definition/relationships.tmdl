@@ -1,0 +1,53 @@
+relationship AutoDetected_7d085c11-11eb-416f-976c-0c1cc13c9a30
+	fromColumn: FCT_FULLY_LOADED_COST.COST_POOL_ID
+	toColumn: DIM_COST_POOL.COST_POOL_ID
+
+relationship AutoDetected_6e4a0909-cae7-46f3-ba4f-e896066c860a
+	fromColumn: FCT_FULLY_LOADED_COST.PRODUCT_ID
+	toColumn: DIM_PRODUCT.PRODUCT_ID
+
+relationship AutoDetected_fb4895af-cf84-4c78-8865-a7f97977aa2d
+	fromColumn: FCT_FULLY_LOADED_COST.APPLICATION_ID
+	toColumn: DIM_APPLICATION.APPLICATION_ID
+
+relationship 67d383ef-4558-4df1-825b-5b9552d4124a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_DATE.MONTH_START
+	toColumn: LocalDateTable_bc262837-7e74-40cc-9295-f7fddb0dce1f.Date
+
+relationship 7c529f64-a6cf-21be-a547-7d78bc228cd8
+	fromColumn: FCT_FULLY_LOADED_COST.DATE_KEY
+	toColumn: DIM_DATE.DATE_KEY
+
+relationship b2307c02-2fcd-cc05-c6d6-0b584a8f15e2
+	fromColumn: FCT_FULLY_LOADED_COST.PRODUCT_ID
+	toColumn: BRIDGE_PRODUCT_FUNDING_PROGRAM.PRODUCT_ID
+
+relationship 638dae9d-c65f-9294-1601-49c8af98c9d0
+	fromColumn: FACT_BUDGET_FORECAST.PRODUCT_ID
+	toColumn: DIM_PRODUCT.PRODUCT_ID
+
+relationship d380094f-902c-afe4-3692-8847b6a36953
+	fromColumn: FACT_BUDGET_FORECAST.DATE_KEY
+	toColumn: DIM_DATE.DATE_KEY
+
+relationship ce609daa-4fb4-6a47-8e6f-feb93131d048
+	fromColumn: FACT_CONSUMPTION.APPLICATION_ID
+	toColumn: DIM_APPLICATION.APPLICATION_ID
+
+relationship 9e782902-63c1-66d9-0485-80c59135f3f5
+	fromColumn: FACT_CONSUMPTION.PRODUCT_ID
+	toColumn: DIM_PRODUCT.PRODUCT_ID
+
+relationship fc7926a3-576f-0b7a-4f73-9284c4becd9f
+	fromColumn: FACT_CONSUMPTION.DATE_KEY
+	toColumn: DIM_DATE.DATE_KEY
+
+relationship a1b2c3d4-e5f6-4718-9203-040506070809
+	fromColumn: VW_VARIANCE.PRODUCT_ID
+	toColumn: DIM_PRODUCT.PRODUCT_ID
+
+relationship b2c3d4e5-f607-4829-a304-050607080910
+	fromColumn: VW_VARIANCE.DATE_KEY
+	toColumn: DIM_DATE.DATE_KEY
+

@@ -1,0 +1,48 @@
+table DIM_PRODUCT
+	lineageTag: cd7e4c3d-66d7-4eb9-a1c0-5628695eff00
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: ebdd4e0b-708e-4004-8f94-1a34344a621a
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME
+		dataType: string
+		lineageTag: 3dfe5e24-b17f-46b7-8a71-0403a46a6dc7
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CATEGORY
+		dataType: string
+		lineageTag: 69e2c12b-9396-400c-aac0-1d69e269a16b
+		summarizeBy: none
+		sourceColumn: PRODUCT_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIMARY_DRIVER
+		dataType: string
+		lineageTag: 2ff5ad3d-fbdf-4eaa-84a6-ff70dba9018d
+		summarizeBy: none
+		sourceColumn: PRIMARY_DRIVER
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PRODUCT = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    DIM_PRODUCT_Table = MERIDIAN_Schema{[Name="DIM_PRODUCT",Kind="Table"]}[Data]
+				in
+				    DIM_PRODUCT_Table
+
+	annotation PBI_ResultType = Table
+

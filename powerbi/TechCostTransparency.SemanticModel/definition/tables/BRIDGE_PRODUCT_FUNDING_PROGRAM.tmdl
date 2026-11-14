@@ -1,0 +1,58 @@
+table BRIDGE_PRODUCT_FUNDING_PROGRAM
+	lineageTag: 0284f1df-689d-4d3f-8f74-04a08101ac5d
+
+	column FUNDING_REQUEST_ID
+		dataType: string
+		lineageTag: 72297b83-35c8-413e-bc4d-4653ce782532
+		summarizeBy: none
+		sourceColumn: FUNDING_REQUEST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNDING_REQUEST_NAME
+		dataType: string
+		lineageTag: cd12e2d8-4330-48cd-b961-6f42ea4dffdc
+		summarizeBy: none
+		sourceColumn: FUNDING_REQUEST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: 21524604-9414-4aff-b673-2cc3af9afaa4
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROGRAM_ID
+		dataType: string
+		lineageTag: 44128c88-4952-420a-8f65-1328be68a02d
+		summarizeBy: none
+		sourceColumn: PROGRAM_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROGRAM_NAME
+		dataType: string
+		lineageTag: 5df4fc77-7592-4e05-a47b-6024be28f839
+		summarizeBy: none
+		sourceColumn: PROGRAM_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BRIDGE_PRODUCT_FUNDING_PROGRAM = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
+				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
+				    DIM_PRODUCT_REQUEST_Table = MERIDIAN_Schema{[Name="DIM_PRODUCT_REQUEST",Kind="Table"]}[Data]
+				in
+				    DIM_PRODUCT_REQUEST_Table
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+
