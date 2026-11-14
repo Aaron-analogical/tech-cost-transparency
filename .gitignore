@@ -1,2 +1,6 @@
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
+
+# Old local Power BI copy with a hard-coded Snowflake account. Superseded by
+# powerbi/, where the account is the SnowflakeAccount parameter.
+/pbi/

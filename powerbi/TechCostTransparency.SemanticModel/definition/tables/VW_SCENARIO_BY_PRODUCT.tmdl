@@ -63,7 +63,7 @@ table VW_SCENARIO_BY_PRODUCT
 		mode: import
 		source =
 				let
-				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    Source = Snowflake.Databases(SnowflakeAccount,"COMPUTE_WH",[Implementation="2.0"]),
 				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
 				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
 				    VW_SCENARIO_BY_PRODUCT_View = MERIDIAN_Schema{[Name="VW_SCENARIO_BY_PRODUCT",Kind="View"]}[Data]

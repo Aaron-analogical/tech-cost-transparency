@@ -37,39 +37,36 @@ table FCT_FULLY_LOADED_COST
 
 	column DIRECT_AND_ALLOC_USD
 		dataType: double
+		formatString: $#,##0
 		lineageTag: 19530186-1f5d-4228-85bf-1e24441bf571
 		summarizeBy: sum
 		sourceColumn: DIRECT_AND_ALLOC_USD
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column OVERHEAD_LOADING_USD
 		dataType: double
+		formatString: $#,##0
 		lineageTag: 090060a2-5702-4fe9-bea9-c0ffff2e80a0
 		summarizeBy: sum
 		sourceColumn: OVERHEAD_LOADING_USD
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column FULLY_LOADED_USD
 		dataType: double
+		formatString: $#,##0
 		lineageTag: abafa3b8-fd5b-4017-8825-47babb0cc055
 		summarizeBy: sum
 		sourceColumn: FULLY_LOADED_USD
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	partition FCT_FULLY_LOADED_COST = m
 		mode: import
 		source =
 				let
-				    Source = Snowflake.Databases("<your-account>.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    Source = Snowflake.Databases(SnowflakeAccount,"COMPUTE_WH",[Implementation="2.0"]),
 				    CASE_STUDY_Database = Source{[Name="CASE_STUDY",Kind="Database"]}[Data],
 				    MERIDIAN_Schema = CASE_STUDY_Database{[Name="MERIDIAN",Kind="Schema"]}[Data],
 				    FCT_FULLY_LOADED_COST_Table = MERIDIAN_Schema{[Name="FCT_FULLY_LOADED_COST",Kind="Table"]}[Data]

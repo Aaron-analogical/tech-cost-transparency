@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "f60718293040ab1c2d3e",
   "position": {
-    "x": 20,
-    "y": 260,
-    "z": 1005,
-    "height": 430,
-    "width": 1240,
-    "tabOrder": 6
+    "x": 24,
+    "y": 340,
+    "z": 7000,
+    "height": 356,
+    "width": 1232,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -166,6 +166,28 @@
         "root": {}
       }
     ],
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Scenario impact by product and application'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

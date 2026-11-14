@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "480535e15122995f9443",
   "position": {
-    "x": 19.701492537313431,
-    "y": 274.92537313432837,
-    "z": 4000,
-    "height": 279.40298507462688,
-    "width": 610.74626865671644,
-    "tabOrder": 2000
+    "x": 24.0,
+    "y": 204,
+    "z": 6000,
+    "height": 492,
+    "width": 608.0,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -82,6 +82,28 @@
         "isDefaultSort": true
       }
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Fully-loaded cost by product'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "drill_card_appcnt001",
   "position": {
-    "x": 1059.6571428571428,
-    "y": 20.114285714285714,
-    "z": 0,
-    "height": 109.71428571428571,
-    "width": 200.22857142857143,
-    "tabOrder": 3
+    "x": 856.0,
+    "y": 92,
+    "z": 5000,
+    "height": 96,
+    "width": 400.0,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "card",

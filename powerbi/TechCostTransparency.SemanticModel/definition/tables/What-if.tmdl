@@ -7,6 +7,7 @@ table What-if
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column Parameter
+		formatString: 0%
 		lineageTag: 8e401171-861a-421e-9894-afdf9368df29
 		summarizeBy: none
 		sourceColumn: [Value]
@@ -17,8 +18,6 @@ table What-if
 				}
 
 		annotation SummarizationSetBy = User
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition What-if = calculated
 		mode: import

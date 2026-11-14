@@ -7,6 +7,7 @@ table 'Vendor Increase %'
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column Parameter
+		formatString: 0%
 		lineageTag: 7f2a9b8c-0d3e-4f4a-c19d-4e5f6a7b8c9d
 		summarizeBy: none
 		sourceColumn: [Value]
@@ -17,8 +18,6 @@ table 'Vendor Increase %'
 				}
 
 		annotation SummarizationSetBy = User
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition 'Vendor Increase %' = calculated
 		mode: import

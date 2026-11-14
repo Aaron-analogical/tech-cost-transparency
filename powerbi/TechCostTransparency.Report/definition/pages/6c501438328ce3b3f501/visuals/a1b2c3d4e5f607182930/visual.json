@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "a1b2c3d4e5f607182930",
   "position": {
-    "x": 644.776119402985,
-    "y": 274.92537313432837,
-    "z": 4001,
-    "height": 279.40298507462688,
-    "width": 609.85074626865674,
-    "tabOrder": 2001
+    "x": 648.0,
+    "y": 204,
+    "z": 7000,
+    "height": 492,
+    "width": 608.0,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -82,6 +82,28 @@
         "isDefaultSort": true
       }
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Fully-loaded cost by cost pool'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

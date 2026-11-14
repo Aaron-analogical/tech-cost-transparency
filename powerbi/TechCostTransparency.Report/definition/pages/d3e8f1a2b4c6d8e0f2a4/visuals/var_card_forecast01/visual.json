@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "var_card_forecast01",
   "position": {
-    "x": 640,
-    "y": 100,
-    "z": 0,
-    "height": 100,
-    "width": 290,
-    "tabOrder": 3
+    "x": 648.0,
+    "y": 92,
+    "z": 4000,
+    "height": 96,
+    "width": 296.0,
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "card",
@@ -34,6 +34,21 @@
         }
       }
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "2L"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

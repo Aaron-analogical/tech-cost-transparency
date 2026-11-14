@@ -1,0 +1,7 @@
+/// Snowflake account host (the part before /console in your Snowflake URL).
+expression SnowflakeAccount = "<your-account>.snowflakecomputing.com" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 11e17312-70b2-48cb-a47e-11cb5af70ee5
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "var_chart_trend0001",
   "position": {
-    "x": 20,
-    "y": 220,
-    "z": 0,
-    "height": 290,
-    "width": 610,
-    "tabOrder": 5
+    "x": 24.0,
+    "y": 204,
+    "z": 6000,
+    "height": 292,
+    "width": 608.0,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -102,6 +102,28 @@
         "isDefaultSort": true
       }
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Actual vs budget vs forecast by month'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

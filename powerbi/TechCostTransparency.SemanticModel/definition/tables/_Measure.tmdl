@@ -34,23 +34,20 @@ table _Measure
 			        DIM_COST_POOL[COST_POOL_ID] = "CP04"
 			    )
 			RETURN DCCost * MigPct * ( CloudFactor - 1 )
+		formatString: $#,##0
 		lineageTag: dbc8e86c-e451-4e7c-a637-62d296b8af4b
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Fully-Loaded Cost' =
 			
 			SUM ( FCT_FULLY_LOADED_COST[FULLY_LOADED_USD] )
+		formatString: $#,##0
 		lineageTag: b90e6a7d-e342-447b-8cdc-f8883d820572
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Fully-Loaded Cost (Scenario)' =
 			
 			[Fully-Loaded Cost] + [Scenario Cloud Delta]
+		formatString: $#,##0
 		lineageTag: a2d2a1a6-0c39-49a1-81ee-c8bc305ad840
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Cost per vCPU-hour' =
 			
